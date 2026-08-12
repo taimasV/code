@@ -27,9 +27,9 @@ export function Auth() {
           : supabase.auth.signInWithPassword({ email, password });
       const { error } = await fn;
       if (error) setMessage(error.message);
-      else if (mode === 'signup') setMessage('Готово! Проверь почту, если нужна подтверждалка.');
+      else if (mode === 'signup') setMessage('Done! Check your email to confirm your account.');
     } catch {
-      setMessage('Что-то пошло не так. Попробуй ещё раз.');
+      setMessage('Something went wrong. Please try again.');
     } finally {
       setBusy(false);
     }
@@ -37,7 +37,7 @@ export function Auth() {
 
   return (
     <section className="card">
-      <h2>{mode === 'signin' ? 'Вход' : 'Регистрация'}</h2>
+      <h2>{mode === 'signin' ? 'Sign in' : 'Create account'}</h2>
       <form onSubmit={handleSubmit} className="form">
         <input
           type="email"
@@ -48,14 +48,14 @@ export function Auth() {
         />
         <input
           type="password"
-          placeholder="пароль (6+ символов)"
+          placeholder="password (6+ characters)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           minLength={6}
           required
         />
         <button type="submit" disabled={busy}>
-          {busy ? '…' : mode === 'signin' ? 'Войти' : 'Создать аккаунт'}
+          {busy ? '…' : mode === 'signin' ? 'Sign in' : 'Create account'}
         </button>
       </form>
       {message && <p className="message">{message}</p>}
@@ -63,7 +63,7 @@ export function Auth() {
         className="ghost"
         onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
       >
-        {mode === 'signin' ? 'Нет аккаунта? Зарегистрируйся' : 'Уже есть аккаунт? Войти'}
+        {mode === 'signin' ? 'No account? Sign up' : 'Already have an account? Sign in'}
       </button>
     </section>
   );

@@ -50,29 +50,29 @@ export function Entries({ userEmail }: { userEmail: string }) {
 
   return (
     <section className="card">
-      <p className="hello">Привет, {userEmail} 👋</p>
-      <h2>Мои записи</h2>
+      <p className="hello">Hello, {userEmail} 👋</p>
+      <h2>My entries</h2>
 
       <form onSubmit={add} className="form-row">
         <input
-          placeholder="что добавить…"
+          placeholder="add something…"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <button type="submit">Добавить</button>
+        <button type="submit">Add</button>
       </form>
 
       {error && <p className="message">{error}</p>}
 
       {entries.length === 0 ? (
-        <p className="empty">Пока пусто. Добавь первую запись 👆</p>
+        <p className="empty">Nothing here yet. Add your first entry 👆</p>
       ) : (
         <ul className="list">
           {entries.map((it) => (
             <li key={it.id}>
               <span>{it.title}</span>
               <button className="ghost small" onClick={() => remove(it.id)}>
-                удалить
+                delete
               </button>
             </li>
           ))}

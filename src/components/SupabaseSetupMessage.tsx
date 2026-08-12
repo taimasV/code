@@ -1,10 +1,10 @@
 export function SupabaseSetupMessage() {
   return (
     <section className="card">
-      <h2>Сначала подключи Supabase</h2>
+      <h2>Connect Supabase first</h2>
       <p className="message">
-        Скопируй <code>.env.example</code> в <code>.env</code> и вставь URL и Publishable key
-        своего проекта.
+        Copy <code>.env.example</code> to <code>.env</code>, then add your project URL and
+        publishable key.
       </p>
     </section>
   );
