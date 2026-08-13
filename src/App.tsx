@@ -9,6 +9,11 @@ import { SnakePage } from './pages/SnakePage';
 import { BattleshipPage } from './pages/BattleshipPage';
 import { ChessPage } from './pages/ChessPage';
 import { CheckersPage } from './pages/CheckersPage';
+import { ReversiPage } from './pages/ReversiPage';
+import { ReactionPage } from './pages/ReactionPage';
+import { MahjongPage } from './pages/MahjongPage';
+import { ConnectDotsPage } from './pages/ConnectDotsPage';
+import { AuthPage } from './pages/AuthPage';
 
 export default function App() {
   return (
@@ -22,6 +27,13 @@ export default function App() {
       <Route path="/battleship" component={BattleshipPage} />
       <Route path="/chess" component={ChessPage} />
       <Route path="/checkers" component={CheckersPage} />
+      <Route path="/reversi" component={ReversiPage} />
+      <Route path="/reaction" component={ReactionPage} />
+      <Route path="/mahjong" component={MahjongPage} />
+      <Route path="/connect-dots" component={ConnectDotsPage} />
+      <Route path="/login"><AuthPage mode="signin" /></Route>
+      <Route path="/register"><AuthPage mode="signup" /></Route>
+      <Route path="/auth"><AuthPage mode="signin" /></Route>
       <Route component={NotFoundPage} />
     </Switch>
   );

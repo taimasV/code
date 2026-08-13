@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { GameCard } from '../components/GameCard';
+import { AccountControls } from '../components/AccountControls';
 
 type Category = 'quick' | 'strategy';
 
@@ -9,14 +11,16 @@ const quickGames = [
   { title: 'Snake', icon: '🐍', description: 'Grow without hitting your tail', href: '/snake' },
   { title: 'Memory', icon: '🧠', description: 'Find all the matching pairs', href: '/memory' },
   { title: 'Battleship', icon: '🚢', description: 'Find and sink the enemy fleet', href: '/battleship' },
-  { title: 'Aim / Reaction', icon: '🎯', description: 'Test your reaction speed' },
+  { title: 'Aim / Reaction', icon: '🎯', description: 'Test your reaction speed', href: '/reaction' },
   { title: 'Minesweeper', icon: '💣', description: 'Clear the field using clues', href: '/minesweeper' },
+  { title: 'Mahjong', icon: '🀄', description: 'Match open pairs of tiles', href: '/mahjong' },
+  { title: 'Connect Dots', icon: '🔵', description: 'Fill the board with colored paths', href: '/connect-dots' },
 ];
 
 const strategyGames = [
   { title: 'Chess', icon: '♟️', description: 'The classic game of strategy', href: '/chess' },
   { title: 'Checkers', icon: '⚫', description: 'Lead your pieces to promotion', href: '/checkers' },
-  { title: 'Reversi', icon: '⚪', description: 'Capture more pieces than your rival' },
+  { title: 'Reversi', icon: '⚪', description: 'Capture more pieces than your rival', href: '/reversi' },
   { title: 'Detective', icon: '🔎', description: 'Solve clues and uncover the mystery' },
 ];
 
@@ -26,16 +30,24 @@ export function HomePage() {
 
   return (
     <main className="container home-page">
+      <header className="home-header">
+        <span className="home-brand">Playroom</span>
+        <AccountControls />
+      </header>
       <section className="hero">
         <span className="eyebrow">Your game collection</span>
         <h1>Choose a game<br />and play</h1>
-        <p>Eleven favorite games in one place.</p>
+        <p>Thirteen favorite games in one place.</p>
+        <div className="hero-actions">
+          <Link href="/register" className="hero-button hero-button--primary">Create account</Link>
+          <Link href="/login" className="hero-button hero-button--secondary">Sign in</Link>
+        </div>
       </section>
 
       <section className="games-section" aria-labelledby="games-title">
         <div className="section-heading">
           <h2 id="games-title">Games</h2>
-          <span>8 of 11 ready</span>
+          <span>12 of 13 ready</span>
         </div>
         <div className="game-tabs" role="tablist" aria-label="Game categories">
           <button
@@ -44,7 +56,7 @@ export function HomePage() {
             role="tab"
             aria-selected={category === 'quick'}
           >
-            Quick games <span>7</span>
+            Quick games <span>9</span>
           </button>
           <button
             className={category === 'strategy' ? 'game-tab game-tab--active' : 'game-tab'}
