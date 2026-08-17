@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { CheckersBoard } from '../components/CheckersBoard';
 import { CheckersModeSelect, type CheckersOpponent } from '../components/CheckersModeSelect';
 import { GamePageHeader } from '../components/GamePageHeader';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import {
   applyCheckerMove, chooseCheckerBotMove, createCheckersBoard,
   getLegalMoves, type CheckerColor, type CheckerMove,
 } from '../lib/checkers';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 export function CheckersPage() {
   const [opponent, setOpponent] = useState<CheckersOpponent | null>(null);
@@ -13,6 +15,7 @@ export function CheckersPage() {
   const [turn, setTurn] = useState<CheckerColor>('red');
   const [selected, setSelected] = useState<number | null>(null);
   const [forcedFrom, setForcedFrom] = useState<number | undefined>();
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const legalMoves = getLegalMoves(board, turn, forcedFrom);
   const winner = opponent && !legalMoves.length ? (turn === 'red' ? 'Black' : 'Red') : null;
   const botThinking = opponent === 'bot' && turn === 'black' && !winner;
@@ -57,6 +60,7 @@ export function CheckersPage() {
     setTurn('red');
     setSelected(null);
     setForcedFrom(undefined);
+    startNewAttempt();
   }
 
   const status = winner ? `${winner} wins! 🎉` : botThinking ? 'Bot is thinking…' : `${turn === 'red' ? 'Red' : 'Black'} to move${forcedFrom !== undefined ? ' — continue capturing!' : ''}`;
@@ -70,6 +74,12 @@ export function CheckersPage() {
         {!opponent ? <CheckersModeSelect onSelect={start} /> : (
           <>
             <p className={`game-status ${winner ? 'game-status--winner' : ''}`}>{status}</p>
+            <GameWinStreakBadge
+              active={opponent === 'bot'}
+              attemptId={attemptId}
+              game="checkers"
+              result={winner ? (winner === 'Red' ? 'win' : 'loss') : null}
+            />
             <CheckersBoard board={board} moves={legalMoves} selected={selected} turn={turn} onCellClick={clickCell} />
             <p className="game-hint">Captures are required. Complete every available jump in a capture chain.</p>
             <div className="chess-actions"><button className="restart-button" onClick={() => start()}>New game</button><button className="mine-tool" onClick={() => setOpponent(null)}>Change mode</button></div>

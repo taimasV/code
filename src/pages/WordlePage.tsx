@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { GameRules } from '../components/GameRules';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { WordleBoard } from '../components/WordleBoard';
 import { WordleKeyboard } from '../components/WordleKeyboard';
 import { chooseWord, keyboardResults, type WordleLength } from '../lib/wordle';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 export function WordlePage() {
   const [length, setLength] = useState<WordleLength>(5);
   const [answer, setAnswer] = useState(() => chooseWord(5));
   const [guesses, setGuesses] = useState<string[]>([]);
   const [current, setCurrent] = useState('');
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const won = guesses.includes(answer);
   const lost = !won && guesses.length === 6;
 
@@ -45,6 +48,7 @@ export function WordlePage() {
     setAnswer(chooseWord(nextLength, nextLength === length ? answer : undefined));
     setGuesses([]);
     setCurrent('');
+    startNewAttempt();
   }
 
   const status = won ? `You found ${answer}! 🎉` : lost ? `The word was ${answer}` : `${6 - guesses.length} guesses left`;
@@ -58,6 +62,7 @@ export function WordlePage() {
           {([5, 6] as WordleLength[]).map((option) => <button className={length === option ? 'difficulty-tab difficulty-tab--active' : 'difficulty-tab'} key={option} onClick={() => start(option)}>{option} letters<span>6 guesses</span></button>)}
         </div>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{status}</p>
+        <GameWinStreakBadge active attemptId={attemptId} game="wordle" result={won ? 'win' : lost ? 'loss' : null} />
         <GameRules rules={[
           `Guess the hidden ${length}-letter English word in six tries.`,
           'Green means the letter is correct and in the right place.',

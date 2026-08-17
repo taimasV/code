@@ -1,5 +1,6 @@
 import { Route, Switch } from 'wouter';
 import { HomePage } from './pages/HomePage';
+import { LandingPage } from './pages/LandingPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { TicTacToePage } from './pages/TicTacToePage';
 import { ConnectFourPage } from './pages/ConnectFourPage';
@@ -25,7 +26,8 @@ import { NutsAndBoltsPage } from './pages/NutsAndBoltsPage';
 export default function App() {
   return (
     <Switch>
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={LandingPage} />
+      <Route path="/games" component={HomePage} />
       <Route path="/tic-tac-toe" component={TicTacToePage} />
       <Route path="/connect-four" component={ConnectFourPage} />
       <Route path="/memory" component={MemoryPage} />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { GoogleSignInButton } from './GoogleSignInButton';
 
 type AuthProps = {
   initialMode?: AuthMode;
@@ -64,6 +65,9 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
         {mode === 'signin' ? 'Sign in to continue playing.' : 'Register with your email and password.'}
       </p>
 
+      <GoogleSignInButton className="auth-google-button" />
+      <div className="auth-divider"><span>or use email</span></div>
+
       <form onSubmit={handleSubmit} className="auth-form">
         <label>
           Email
@@ -101,13 +105,13 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
             />
           </label>
         )}
-        <button className="auth-submit" type="submit" disabled={busy}>
+        <button className={`auth-submit auth-submit--${mode}`} type="submit" disabled={busy}>
           {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
         </button>
       </form>
 
       {message && <p className="auth-message" role="status">{message}</p>}
-      <button className="auth-switch" type="button" onClick={switchMode}>
+      <button className={`auth-switch ${mode === 'signin' ? 'auth-switch--register' : ''}`} type="button" onClick={switchMode}>
         {mode === 'signin' ? 'No account? Register' : 'Already registered? Sign in'}
       </button>
     </section>

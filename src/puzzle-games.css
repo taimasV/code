@@ -61,7 +61,7 @@
 .sudoku-cell:nth-child(9n) { border-right: 0; }
 .sudoku-cell:nth-child(n+19):nth-child(-n+27), .sudoku-cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #494641; }
 .sudoku-cell--related { background: #f2eee4; }
-.sudoku-cell--same { background: #f2ded5; }
+.sudoku-cell--same { background: #dff2fb; }
 .sudoku-cell--selected { outline: 3px solid var(--accent); outline-offset: -3px; background: #edd0c3; }
 .sudoku-cell--fixed { color: var(--ink); font-weight: 850; }
 .sudoku-keypad { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; width: min(100%, 510px); margin: 0 auto 18px; }

@@ -12,9 +12,9 @@ export function AuthPage({ mode = 'signin' }: AuthPageProps) {
 
   return (
     <main className="container auth-page">
-      <Link href="/" className="back-link">← All games</Link>
+      <Link href="/" className="back-link">← Back to home</Link>
       {isSupabaseConfigured
-        ? <Auth initialMode={mode} onAuthenticated={() => navigate('/')} />
+        ? <Auth initialMode={mode} onAuthenticated={() => navigate('/games')} />
         : <SupabaseSetupMessage />}
     </main>
   );

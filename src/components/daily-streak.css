@@ -1,0 +1,42 @@
+.home-tools { display: flex; align-items: center; gap: 10px; }
+
+.streak {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #d9d3ea;
+  border-radius: 13px;
+  background: #fdfcff;
+  color: #6f6b86;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(56, 48, 70, .08);
+}
+
+.streak strong { color: #24233d; font-size: 17px; }
+.streak small { margin-left: 2px; opacity: .68; }
+.streak__icon { color: #98919b; font-size: 17px; }
+.streak--guest { font-size: 13px; font-weight: 750; }
+.streak--guest:hover { border-color: #397fd1; color: #397fd1; }
+.streak--level-1 { border-color: #91cde8; background: #e6f6fd; }
+.streak--level-1 .streak__icon { color: #419dca; }
+.streak--level-2 { border-color: #77b7e2; background: #e3f1fc; }
+.streak--level-2 .streak__icon { color: #3488c2; }
+.streak--level-3 { border-color: #739bdd; background: #e7effc; }
+.streak--level-3 .streak__icon { color: #477cc8; }
+.streak--level-4 { border-color: #8887d7; background: #ecebfb; box-shadow: 0 5px 18px rgba(84, 85, 180, .16); }
+.streak--level-4 .streak__icon { color: #6665c3; }
+.streak--level-5 { border-color: #9878cf; background: #f0eafb; }
+.streak--level-5 .streak__icon { color: #7958b6; }
+.streak--level-6 { border-color: #825ebc; background: #e9e0f7; }
+.streak--level-6 .streak__icon { color: #6746a3; }
+.streak--level-7 { border-color: #352c45; background: linear-gradient(135deg, #293d5a, #593352); color: #e8dce6; box-shadow: 0 7px 22px rgba(50, 38, 60, .28); }
+.streak--level-7 strong, .streak--level-7 .streak__icon { color: #d7eaff; }
+
+@media (max-width: 760px) {
+  .home-header { align-items: flex-start; }
+  .home-tools { align-items: flex-end; flex-direction: column-reverse; }
+  .streak { min-height: 34px; padding: 6px 9px; }
+  .streak small { display: none; }
+}

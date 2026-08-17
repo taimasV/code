@@ -19,7 +19,7 @@
 
 .game-panel--memory { max-width: 650px; }
 .memory-board { display: grid; gap: 10px; width: min(100%, 630px); margin: 0 auto 26px; }
-.memory-card { aspect-ratio: 1; border: 1px solid #477c75; border-radius: 16px; background: #477c75; color: #fff; cursor: pointer; font-size: clamp(28px, 8vw, 42px); font-weight: 800; transition: transform .2s, background .2s; }
+.memory-card { aspect-ratio: 1; border: 1px solid #d95786; border-radius: 16px; background: #d95786; color: #fff; cursor: pointer; font-size: clamp(28px, 8vw, 42px); font-weight: 800; transition: transform .2s, background .2s; }
 .memory-card:hover:not(:disabled) { transform: translateY(-2px); }
 .memory-card--visible { background: var(--card); color: var(--ink); transform: rotateY(0); }
 .memory-card--matched { border-color: #8dab83; background: #e4eddf; }
@@ -51,7 +51,7 @@
 .snake-board { position: relative; width: min(100%, 520px); aspect-ratio: 1; margin: 0 auto 18px; border: 8px solid #d6d1c5; border-radius: 15px; overflow: hidden; background-color: #f9f6ef; background-image: linear-gradient(#e7e2d8 1px, transparent 1px), linear-gradient(90deg, #e7e2d8 1px, transparent 1px); background-size: 6.25% 6.25%; }
 .snake-part, .snake-food { position: absolute; top: 0; left: 0; width: 6.25%; height: 6.25%; will-change: transform; }
 .snake-part { z-index: 2; border: 1px solid rgba(255, 255, 255, .32); border-radius: 20%; transition: transform 120ms linear; }
-.snake-part--player { background: #477c75; }
+.snake-part--player { background: #3f9c68; }
 .snake-part--head { z-index: 3; border-radius: 30%; }
 .snake-part--head::after { content: ''; position: absolute; width: 24%; height: 24%; top: 18%; right: 16%; border-radius: 50%; background: #fff; }
 .snake-food { z-index: 1; display: flex; align-items: center; justify-content: center; overflow: visible; font-size: clamp(18px, 5.5vw, 32px); line-height: 1; text-align: center; transition: transform 120ms ease; }

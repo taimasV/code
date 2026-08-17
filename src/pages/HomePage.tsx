@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { GameCard } from '../components/GameCard';
 import { AccountControls } from '../components/AccountControls';
+import { DailyStreak } from '../components/DailyStreak';
 
 type Category = 'quick' | 'strategy';
 
@@ -35,7 +36,10 @@ export function HomePage() {
   const games = category === 'quick' ? quickGames : strategyGames;
   return (
     <main className="container home-page">
-      <header className="home-header"><span className="home-brand">Playroom</span><AccountControls /></header>
+      <header className="home-header">
+        <span className="home-brand">Playroom</span>
+        <div className="home-tools"><DailyStreak /><AccountControls /></div>
+      </header>
       <section className="hero">
         <span className="eyebrow">Your game collection</span>
         <h1>Choose a game<br />and play</h1>

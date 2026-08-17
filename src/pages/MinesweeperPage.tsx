@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { MinesweeperBoard } from '../components/MinesweeperBoard';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import {
   MINE_DIFFICULTIES, createEmptyMineBoard, createMineBoard,
   revealCells, toggleFlag,
 } from '../lib/minesweeper';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 type Tool = 'reveal' | 'flag';
 
@@ -15,6 +17,7 @@ export function MinesweeperPage() {
   const [lost, setLost] = useState(false);
   const [tool, setTool] = useState<Tool>('reveal');
   const [seconds, setSeconds] = useState(0);
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const won = started && !lost && board.every((cell) => cell.isMine || cell.revealed);
   const flags = board.filter((cell) => cell.flagged).length;
 
@@ -49,6 +52,7 @@ export function MinesweeperPage() {
     setLost(false);
     setTool('reveal');
     setSeconds(0);
+    startNewAttempt();
   }
 
   const status = lost ? 'Boom! Try again 💥' : won ? 'Field cleared! 🎉' : `${difficulty.mines - flags} mines left`;
@@ -75,6 +79,7 @@ export function MinesweeperPage() {
           <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{status}</p>
           <p className="game-timer" aria-label={`Time ${time}`}>⏱ {time}</p>
         </div>
+        <GameWinStreakBadge active attemptId={attemptId} game="minesweeper" result={won ? 'win' : lost ? 'loss' : null} />
         <div className="mine-tools" aria-label="Minesweeper tools">
           <button className={tool === 'reveal' ? 'mine-tool mine-tool--active' : 'mine-tool'} onClick={() => setTool('reveal')}>⛏ Reveal</button>
           <button className={tool === 'flag' ? 'mine-tool mine-tool--active' : 'mine-tool'} onClick={() => setTool('flag')} disabled={!started}>🚩 Flag</button>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { ReversiBoard } from '../components/ReversiBoard';
 import { ReversiModeSelect, type ReversiOpponent } from '../components/ReversiModeSelect';
 import {
   applyReversiMove, chooseReversiBotMove, countReversiPieces,
   createReversiBoard, getReversiMoves, type ReversiColor, type ReversiMove,
 } from '../lib/reversi';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 type Winner = ReversiColor | 'draw' | null;
 
@@ -15,6 +17,7 @@ export function ReversiPage() {
   const [turn, setTurn] = useState<ReversiColor>('black');
   const [winner, setWinner] = useState<Winner>(null);
   const [notice, setNotice] = useState('');
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const moves = getReversiMoves(board, turn);
   const score = countReversiPieces(board);
   const botThinking = opponent === 'bot' && turn === 'white' && !winner;
@@ -55,6 +58,7 @@ export function ReversiPage() {
     setTurn('black');
     setWinner(null);
     setNotice('');
+    startNewAttempt();
   }
 
   const status = winner === 'draw' ? "It's a draw!" : winner
@@ -70,6 +74,12 @@ export function ReversiPage() {
         {!opponent ? <ReversiModeSelect onSelect={start} /> : (
           <>
             <p className={`game-status ${winner ? 'game-status--winner' : ''}`}>{status}</p>
+            <GameWinStreakBadge
+              active={opponent === 'bot'}
+              attemptId={attemptId}
+              game="reversi"
+              result={winner ? (winner === 'black' ? 'win' : 'loss') : null}
+            />
             <div className="reversi-score"><span>⚫ Black <strong>{score.black}</strong></span><span>⚪ White <strong>{score.white}</strong></span></div>
             <ReversiBoard board={board} moves={moves} disabled={botThinking || Boolean(winner)} onMove={playMove} />
             <p className="game-hint">Place a piece to trap one or more opponent pieces between your own.</p>

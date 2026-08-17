@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { MahjongBoard } from '../components/MahjongBoard';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import {
   MAHJONG_LEVELS, createMahjongTiles, hasMahjongMove,
   removeMahjongPair, shuffleRemainingTiles,
 } from '../lib/mahjong';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 export function MahjongPage() {
   const [levelIndex, setLevelIndex] = useState(0);
@@ -12,6 +14,7 @@ export function MahjongPage() {
   const [tiles, setTiles] = useState(() => createMahjongTiles(level));
   const [selected, setSelected] = useState<number | null>(null);
   const [pairs, setPairs] = useState(0);
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const won = tiles.every((tile) => tile.removed);
 
   useEffect(() => {
@@ -37,6 +40,7 @@ export function MahjongPage() {
     setTiles(createMahjongTiles(nextLevel));
     setSelected(null);
     setPairs(0);
+    startNewAttempt();
   }
 
   return (
@@ -53,6 +57,7 @@ export function MahjongPage() {
           ))}
         </div>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? `Board cleared in ${pairs} pairs! 🎉` : `Pairs removed: ${pairs}`}</p>
+        <GameWinStreakBadge active attemptId={attemptId} game="mahjong" result={won ? 'win' : null} />
         <MahjongBoard level={level} tiles={tiles} selected={selected} onTileClick={chooseTile} />
         <p className="game-hint">Match identical open tiles. A tile must have nothing above it and at least one free side.</p>
         <div className="chess-actions"><button className="restart-button" onClick={() => start()}>New layout</button><button className="mine-tool" onClick={() => setTiles(shuffleRemainingTiles(tiles))}>Shuffle</button></div>

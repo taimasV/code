@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { ConnectDotsBoard } from '../components/ConnectDotsBoard';
 import { GamePageHeader } from '../components/GamePageHeader';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { DOT_LEVELS, countConnectedPairs, isDotLevelComplete, type DotDifficulty, type DotPaths } from '../lib/connectDots';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 export function ConnectDotsPage() {
   const [levelIndex, setLevelIndex] = useState(0);
   const [paths, setPaths] = useState<DotPaths>({});
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const level = DOT_LEVELS[levelIndex];
   const won = isDotLevelComplete(paths, level);
   const connected = countConnectedPairs(paths, level);
@@ -17,6 +20,7 @@ export function ConnectDotsPage() {
   function start(index = levelIndex) {
     setLevelIndex(index);
     setPaths({});
+    startNewAttempt();
   }
 
   return (
@@ -38,6 +42,7 @@ export function ConnectDotsPage() {
           <button className="mine-tool" disabled={levelIndex === difficultyEnd} onClick={() => start(levelIndex + 1)}>→</button>
         </div>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? 'All dots connected! 🎉' : `Connected: ${connected}/${level.pairs.length} · Filled: ${filled}/${level.size ** 2}`}</p>
+        <GameWinStreakBadge active attemptId={attemptId} game="connect-dots" result={won ? 'win' : null} />
         <ConnectDotsBoard level={level} paths={paths} onPathsChange={setPaths} />
         <p className="game-hint">Connect every matching pair without crossing lines. Each puzzle has one path layout, and it covers the whole board.</p>
         <div className="chess-actions">

@@ -3,13 +3,16 @@ import { GamePageHeader } from '../components/GamePageHeader';
 import { GameRules } from '../components/GameRules';
 import { NutsAndBoltsBoard } from '../components/NutsAndBoltsBoard';
 import { NutsDifficultySelect } from '../components/NutsDifficultySelect';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { canMoveNut, createNutsBoard, isNutsPuzzleSolved, moveNut, type NutsBoard, type NutsDifficulty } from '../lib/nutsAndBolts';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 export function NutsAndBoltsPage() {
   const [difficulty, setDifficulty] = useState<NutsDifficulty>('easy');
   const [board, setBoard] = useState(() => createNutsBoard('easy'));
   const [selected, setSelected] = useState<number | null>(null);
   const [history, setHistory] = useState<NutsBoard[]>([]);
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const solved = isNutsPuzzleSolved(board);
 
   function selectBolt(bolt: number) {
@@ -43,6 +46,7 @@ export function NutsAndBoltsPage() {
     setBoard(createNutsBoard(difficulty));
     setHistory([]);
     setSelected(null);
+    startNewAttempt();
   }
 
   function changeDifficulty(nextDifficulty: NutsDifficulty) {
@@ -50,6 +54,7 @@ export function NutsAndBoltsPage() {
     setBoard(createNutsBoard(nextDifficulty));
     setHistory([]);
     setSelected(null);
+    startNewAttempt();
   }
 
   return (
@@ -61,6 +66,7 @@ export function NutsAndBoltsPage() {
         <p className={`game-status ${solved ? 'game-status--winner' : ''}`}>
           {solved ? `Sorted in ${history.length} moves! 🎉` : `Moves: ${history.length}`}
         </p>
+        <GameWinStreakBadge active attemptId={attemptId} game="nuts-and-bolts" result={solved ? 'win' : null} />
         <NutsDifficultySelect value={difficulty} onChange={changeDifficulty} />
         <GameRules rules={['Choose a bolt to pick up its top nut.', 'Move it to an empty bolt or onto the same color.', 'Sort every color onto its own bolt.']} />
         <NutsAndBoltsBoard board={board} selected={selected} onSelect={selectBolt} />

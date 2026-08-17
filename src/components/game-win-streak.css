@@ -1,0 +1,20 @@
+.win-streak {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: -12px auto 22px;
+  padding: 8px 12px;
+  border: 1px solid #d9d3ea;
+  border-radius: 12px;
+  background: #fdfcff;
+  color: #6f6b86;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.win-streak strong { color: #24233d; }
+.win-streak small { opacity: .75; }
+.win-streak--hot { border-color: #7c72ce; background: linear-gradient(135deg, #e5f3ff, #eee8fb); }
+.win-streak--hot > span { color: #5a72c6; }
+.win-streak--guest:hover { border-color: #397fd1; color: #397fd1; }

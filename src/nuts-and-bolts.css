@@ -4,7 +4,7 @@
 .nuts-difficulty button:hover { border-color: var(--accent); }
 .nuts-difficulty small { color: var(--soft); }
 .nuts-difficulty .nuts-difficulty--active { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
-.nuts-board { display: flex; width: min(100%, 540px); min-height: 230px; margin: 28px auto 20px; padding: 24px 18px 18px; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 30px 10px; border: 1px solid #cbc5b9; border-radius: 22px; background: linear-gradient(145deg, #f4f1e9, #ded8cc); box-shadow: inset 0 1px #fff, 0 12px 28px rgba(61, 54, 43, .1); }
+.nuts-board { display: flex; width: min(100%, 540px); min-height: 230px; margin: 28px auto 20px; padding: 24px 18px 18px; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 30px 10px; border: 1px solid #ccd2ed; border-radius: 22px; background: linear-gradient(145deg, #f1f4ff, #dde2f7); box-shadow: inset 0 1px #fff, 0 12px 28px rgba(50, 55, 110, .1); }
 .nuts-bolt { position: relative; width: 92px; height: 184px; padding: 0; border: 0; background: transparent; cursor: pointer; }
 .nuts-bolt::after { position: absolute; right: 12px; bottom: 2px; left: 12px; height: 9px; border-radius: 50%; background: rgba(52, 48, 42, .2); content: ''; filter: blur(4px); transition: transform .18s, background .18s; }
 .nuts-bolt__cap, .nuts-bolt__shaft, .nuts-bolt__base { position: absolute; left: 50%; translate: -50% 0; }

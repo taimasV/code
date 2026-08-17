@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BattleshipBoard } from '../components/BattleshipBoard';
 import { GamePageHeader } from '../components/GamePageHeader';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import {
   FLEET_SIZES, addShip, chooseBotShot, createRandomFleet,
   isFleetSunk, isHit, isSunk, type BattleShip, type Orientation,
 } from '../lib/battleship';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 type Phase = 'placing' | 'battle' | 'won' | 'lost';
 
@@ -19,6 +21,7 @@ export function BattleshipPage() {
   const [placementError, setPlacementError] = useState('');
   const [battleNotice, setBattleNotice] = useState('Choose a cell to fire.');
   const [sunkNotice, setSunkNotice] = useState('');
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const nextShipSize = FLEET_SIZES[playerShips.length];
   const playerShipsLeft = playerShips.filter((ship) => !isSunk(ship, botShots)).length;
   const botShipsLeft = botShips.filter((ship) => !isSunk(ship, playerShots)).length;
@@ -85,6 +88,7 @@ export function BattleshipPage() {
     setPlacementError('');
     setBattleNotice('Choose a cell to fire.');
     setSunkNotice('');
+    startNewAttempt();
   }
 
   const status = phase === 'placing'
@@ -99,6 +103,12 @@ export function BattleshipPage() {
         <span className="game-icon" aria-hidden="true">🚢</span>
         <h1>Battleship</h1>
         <p className={`game-status ${phase === 'won' ? 'game-status--winner' : ''}`}>{status}</p>
+        <GameWinStreakBadge
+          active
+          attemptId={attemptId}
+          game="battleship"
+          result={phase === 'won' ? 'win' : phase === 'lost' ? 'loss' : null}
+        />
         {phase !== 'placing' && (
           <>
             <div className="battle-score" aria-label="Ships remaining">

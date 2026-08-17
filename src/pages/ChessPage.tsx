@@ -6,9 +6,11 @@ import { ChessMoves } from '../components/ChessMoves';
 import { ChessRatingSelect } from '../components/ChessRatingSelect';
 import { ChessVariantSelect, type ChessVariant } from '../components/ChessVariantSelect';
 import { GamePageHeader } from '../components/GamePageHeader';
+import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { PromotionPicker } from '../components/PromotionPicker';
 import { VariantChessGame } from '../components/VariantChessGame';
 import { chooseBotMove, type ChessRating } from '../lib/chessBot';
+import { useGameAttempt } from '../lib/useGameAttempt';
 
 type PromotionPiece = Exclude<PieceSymbol, 'p' | 'k'>;
 type PendingPromotion = { from: Square; to: Square };
@@ -22,6 +24,7 @@ export function ChessPage() {
   const [botRating, setBotRating] = useState<ChessRating>(800);
   const [selected, setSelected] = useState<Square | null>(null);
   const [promotion, setPromotion] = useState<PendingPromotion | null>(null);
+  const { attemptId, startNewAttempt } = useGameAttempt();
   const legalMoves = selected ? chess.current.moves({ square: selected, verbose: true }) : [];
   const legalTargets = new Set(legalMoves.map((move) => move.to));
   const botThinking = variant === 'standard' && opponent === 'bot' && chess.current.turn() === 'b' && !chess.current.isGameOver();
@@ -59,6 +62,7 @@ export function ChessPage() {
     chess.current.reset();
     setSelected(null);
     setPromotion(null);
+    startNewAttempt();
     refresh((value) => value + 1);
   }
 
@@ -71,6 +75,7 @@ export function ChessPage() {
     setBotRating(rating);
     setChoosingRating(false);
     setOpponent('bot');
+    startNewAttempt();
   }
 
   function changeSetup() {
@@ -80,6 +85,7 @@ export function ChessPage() {
     setChoosingRating(false);
     setSelected(null);
     setPromotion(null);
+    startNewAttempt();
   }
 
   function getStatus() {
@@ -109,6 +115,14 @@ export function ChessPage() {
               <>
                 {opponent === 'bot' && <span className="bot-rating-badge">Bot strength: ~{botRating}</span>}
                 <p className={`game-status ${chess.current.isCheck() ? 'game-status--winner' : ''}`}>{getStatus()}</p>
+                <GameWinStreakBadge
+                  active={opponent === 'bot'}
+                  attemptId={attemptId}
+                  game="chess"
+                  result={chess.current.isGameOver()
+                    ? chess.current.isCheckmate() && chess.current.turn() === 'b' ? 'win' : 'loss'
+                    : null}
+                />
                 <div className="chess-layout">
                   <div>
                     <ChessBoard chess={chess.current} selected={selected} legalTargets={legalTargets} onSquareClick={selectSquare} />

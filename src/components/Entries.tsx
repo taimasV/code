@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import { SupabaseSetupMessage } from './SupabaseSetupMessage';
 
-// Пример работы с базой: читаем, добавляем и удаляем свои записи.
-// Таблица `entries` создаётся миграцией в supabase/migrations/. Переделай это под свою идею:
-// вопросы для квиза, привычки, места, карточки — что угодно.
+// Database example: read, add, and remove the current user's entries.
+// The `entries` table is created by a migration in supabase/migrations/.
+// Adapt it to quizzes, habits, places, cards, or another product idea.
 type Entry = {
   id: string;
   title: string;
