@@ -1,10 +1,12 @@
+import { useLanguage } from '../i18n/LanguageContext';
+
 export function SupabaseSetupMessage() {
+  const { t } = useLanguage();
   return (
     <section className="card">
-      <h2>Connect Supabase first</h2>
+      <h2>{t('connectSupabase')}</h2>
       <p className="message">
-        Copy <code>.env.example</code> to <code>.env</code>, then add your project URL and
-        publishable key.
+        {t('supabaseHelp')}
       </p>
     </section>
   );

@@ -6,6 +6,7 @@ import {
 } from '../lib/gameWinStreak';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import './game-win-streak.css';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type GameWinStreakProps = {
   active: boolean;
@@ -15,6 +16,7 @@ type GameWinStreakProps = {
 };
 
 export function GameWinStreakBadge({ active, attemptId, game, result }: GameWinStreakProps) {
+  const { t } = useLanguage();
   const [streak, setStreak] = useState<GameWinStreak | null>(null);
   const [isGuest, setIsGuest] = useState(false);
   const reportedAttempt = useRef<string | null>(null);
@@ -41,14 +43,14 @@ export function GameWinStreakBadge({ active, attemptId, game, result }: GameWinS
   }, [active, attemptId, game, result]);
 
   if (!active) return null;
-  if (isGuest) return <Link href="/login" className="win-streak win-streak--guest">Sign in to save your wins</Link>;
+  if (isGuest) return <Link href="/login" className="win-streak win-streak--guest">{t('saveWins')}</Link>;
   if (!streak) return null;
 
   return (
     <div className={`win-streak ${streak.current >= 3 ? 'win-streak--hot' : ''}`}>
       <span aria-hidden="true">♦</span>
-      <strong>Win streak: {streak.current}</strong>
-      <small>best {streak.best}</small>
+      <strong>{t('winStreak', { count: streak.current })}</strong>
+      <small>{t('best', { count: streak.best })}</small>
     </div>
   );
 }

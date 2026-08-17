@@ -1,0 +1,27 @@
+.language-switcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  display: flex;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid rgba(90, 77, 135, .2);
+  border-radius: 13px;
+  background: rgba(253, 252, 255, .9);
+  box-shadow: 0 8px 26px rgba(48, 38, 78, .15);
+  backdrop-filter: blur(12px);
+}
+
+.language-switcher__button {
+  border: 0;
+  border-radius: 9px;
+  padding: 7px 9px;
+  background: transparent;
+  color: #6f6b86;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.language-switcher__button--active { background: #397fd1; color: white; }

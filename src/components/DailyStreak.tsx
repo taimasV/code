@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import { recordDailyStreak, type Streak } from '../lib/streak';
 import './daily-streak.css';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const milestones = [3, 10, 30, 50, 100, 150, 200] as const;
 const levelIcons = ['◇', '◆', '◈', '✹', '★', '✦', '♛', '★'] as const;
@@ -16,6 +17,7 @@ function getNextMilestone(days: number) {
 }
 
 export function DailyStreak() {
+  const { t } = useLanguage();
   const [streak, setStreak] = useState<Streak | null>(null);
   const [isGuest, setIsGuest] = useState(false);
   const recordedUser = useRef<string | null>(null);
@@ -43,7 +45,7 @@ export function DailyStreak() {
   }, []);
 
   if (isGuest) {
-    return <Link href="/login" className="streak streak--guest">✨ Start a streak</Link>;
+    return <Link href="/login" className="streak streak--guest">{t('startStreak')}</Link>;
   }
 
   if (!streak) return null;
@@ -52,11 +54,11 @@ export function DailyStreak() {
   const nextMilestone = getNextMilestone(streak.currentStreak);
 
   return (
-    <div className={`streak streak--level-${level}`} title={`Best streak: ${streak.longestStreak}`}>
+    <div className={`streak streak--level-${level}`} title={t('bestStreak', { count: streak.longestStreak })}>
       <span className="streak__icon" aria-hidden="true">{levelIcons[level]}</span>
       <strong>{streak.currentStreak}</strong>
-      <span>{streak.currentStreak === 1 ? 'day' : 'days'}</span>
-      {nextMilestone && <small>next: {nextMilestone}</small>}
+      <span>{streak.currentStreak === 1 ? t('day') : t('days')}</span>
+      {nextMilestone && <small>{t('nextMilestone', { count: nextMilestone })}</small>}
     </div>
   );
 }

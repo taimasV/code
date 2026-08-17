@@ -22,10 +22,11 @@ import { QuoridorPage } from './pages/QuoridorPage';
 import { DetectivePage } from './pages/DetectivePage';
 import { MergePage } from './pages/MergePage';
 import { NutsAndBoltsPage } from './pages/NutsAndBoltsPage';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export default function App() {
   return (
-    <Switch>
+    <><LanguageSwitcher /><Switch>
       <Route path="/" component={LandingPage} />
       <Route path="/games" component={HomePage} />
       <Route path="/tic-tac-toe" component={TicTacToePage} />
@@ -51,6 +52,6 @@ export default function App() {
       <Route path="/register"><AuthPage mode="signup" /></Route>
       <Route path="/auth"><AuthPage mode="signin" /></Route>
       <Route component={NotFoundPage} />
-    </Switch>
+    </Switch></>
   );
 }

@@ -1,13 +1,15 @@
 import { Link } from 'wouter';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type GameCardProps = { title: string; icon: string; description: string; href?: string };
 
 export function GameCard({ title, icon, description, href }: GameCardProps) {
+  const { t } = useLanguage();
   const content = (
     <>
       <span className="game-card__icon" aria-hidden="true">{icon}</span>
       <div className="game-card__content"><h3>{title}</h3><p>{description}</p></div>
-      {href ? <span className="game-card__arrow">→</span> : <span className="game-card__soon">Soon</span>}
+      {href ? <span className="game-card__arrow">→</span> : <span className="game-card__soon">{t('soon')}</span>}
     </>
   );
   return href

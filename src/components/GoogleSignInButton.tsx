@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type GoogleSignInButtonProps = {
   className: string;
   label?: string;
 };
 
-export function GoogleSignInButton({ className, label = 'Continue with Google' }: GoogleSignInButtonProps) {
+export function GoogleSignInButton({ className, label }: GoogleSignInButtonProps) {
+  const { t } = useLanguage();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -30,7 +32,7 @@ export function GoogleSignInButton({ className, label = 'Continue with Google' }
         setBusy(false);
       }
     } catch {
-      setMessage('Could not open Google sign-in.');
+      setMessage(t('googleError'));
       setBusy(false);
     }
   }
@@ -44,7 +46,7 @@ export function GoogleSignInButton({ className, label = 'Continue with Google' }
           <path fill="#fbbc05" d="M6.4 13.6a6 6 0 0 1 0-3.2V7.5H3a10 10 0 0 0 0 9l3.4-2.9Z" />
           <path fill="#ea4335" d="M12 6a5.4 5.4 0 0 1 3.8 1.5l2.9-2.8A9.7 9.7 0 0 0 3 7.5l3.4 2.9A6 6 0 0 1 12 6Z" />
         </svg>
-        {busy ? 'Opening…' : label}
+        {busy ? t('googleOpening') : label ?? t('signInGoogle')}
       </button>
       {message && <p className="google-sign-in__message" role="status">{message}</p>}
     </div>

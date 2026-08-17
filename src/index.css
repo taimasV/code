@@ -25,7 +25,12 @@ a { color: inherit; }
 .account-link--quiet { background: transparent; }
 .account-link:hover, .account-controls button:hover { border-color: var(--accent); }
 .account-controls { display: flex; align-items: center; gap: 12px; }
-.account-controls span { max-width: 220px; overflow: hidden; color: var(--soft); font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.nickname-button { max-width: 180px; overflow: hidden; border-color: #8dc8a9 !important; background: #e5f5ec !important; color: #267a51 !important; text-overflow: ellipsis; white-space: nowrap; }
+.nickname-form { position: relative; display: flex; gap: 5px; }
+.nickname-form input { width: 150px; border: 1px solid var(--line); border-radius: 9px; padding: 8px 9px; outline: none; }
+.nickname-form input:focus { border-color: #329769; box-shadow: 0 0 0 3px #dff3e8; }
+.nickname-form button { padding: 8px 9px; }
+.nickname-form small { position: absolute; top: calc(100% + 5px); left: 0; z-index: 2; width: 100%; padding: 6px 8px; border-radius: 7px; background: #fdfcff; color: #b13f5c; box-shadow: 0 5px 18px rgba(48, 38, 78, .12); }
 .hero { padding: 76px 0 66px; max-width: 720px; }
 .eyebrow { color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .hero h1 { margin: 18px 0; font-size: clamp(48px, 8vw, 86px); line-height: .95; letter-spacing: -.055em; }
@@ -103,6 +108,8 @@ a { color: inherit; }
 @media (max-width: 680px) {
   .container { width: min(100% - 28px, 520px); padding-top: 24px; }
   .account-controls span { display: none; }
+  .nickname-form { max-width: 220px; flex-wrap: wrap; justify-content: flex-end; }
+  .nickname-form input { width: 100%; }
   .hero { padding: 58px 0 48px; }
   .hero h1 { font-size: 52px; }
   .game-tabs { width: 100%; }

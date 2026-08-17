@@ -80,6 +80,8 @@
 .landing-button:hover { transform: translateY(-2px); }
 .landing-button--primary { border-color: #3bad76; background: #329769; }
 .landing-button--primary:hover { background: #288259; }
+.landing-button--play { border-color: #4ba6d8; background: linear-gradient(135deg, #45a5d8, #5b68c5); }
+.landing-button--play:hover { background: linear-gradient(135deg, #348fc0, #4c57b3); }
 .landing-button--secondary { background: rgba(255, 255, 255, .08); }
 .landing-button--secondary:hover { background: rgba(255, 255, 255, .13); }
 

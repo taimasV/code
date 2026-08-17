@@ -1,39 +1,46 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { GameCard } from '../components/GameCard';
 import { AccountControls } from '../components/AccountControls';
 import { DailyStreak } from '../components/DailyStreak';
+import { GameCard } from '../components/GameCard';
+import { useLanguage } from '../i18n/LanguageContext';
+import type { TranslationKey } from '../i18n/en';
+import { useCurrentUser } from '../lib/useCurrentUser';
 
 type Category = 'quick' | 'strategy';
+type GameDefinition = { title: TranslationKey; icon: string; description: TranslationKey; href: string };
 
-const quickGames = [
-  { title: 'Tic-Tac-Toe', icon: '❌', description: 'Get three symbols in a row', href: '/tic-tac-toe' },
-  { title: 'Connect 4', icon: '🟡', description: 'Connect four pieces in a row', href: '/connect-four' },
-  { title: 'Snake', icon: '🐍', description: 'Grow without hitting your tail', href: '/snake' },
-  { title: 'Memory', icon: '🧠', description: 'Find all the matching pairs', href: '/memory' },
-  { title: 'Battleship', icon: '🚢', description: 'Find and sink the enemy fleet', href: '/battleship' },
-  { title: 'Aim / Reaction', icon: '🎯', description: 'Test your reaction speed', href: '/reaction' },
-  { title: 'Minesweeper', icon: '💣', description: 'Clear the field using clues', href: '/minesweeper' },
-  { title: 'Mahjong', icon: '🀄', description: 'Match open pairs of tiles', href: '/mahjong' },
-  { title: 'Connect Dots', icon: '🔵', description: 'Fill the board with colored paths', href: '/connect-dots' },
-  { title: 'Merge Garden', icon: '🧩', description: 'Find and combine items to improve them', href: '/merge' },
-  { title: 'Nuts and Bolts', icon: '🔩', description: 'Sort every nut by color', href: '/nuts-and-bolts' },
+const quickGames: GameDefinition[] = [
+  { title: 'gameTicTitle', icon: '❌', description: 'gameTicDesc', href: '/tic-tac-toe' },
+  { title: 'gameConnectTitle', icon: '🟡', description: 'gameConnectDesc', href: '/connect-four' },
+  { title: 'gameSnakeTitle', icon: '🐍', description: 'gameSnakeDesc', href: '/snake' },
+  { title: 'gameMemoryTitle', icon: '🧠', description: 'gameMemoryDesc', href: '/memory' },
+  { title: 'gameBattleTitle', icon: '🚢', description: 'gameBattleDesc', href: '/battleship' },
+  { title: 'gameReactionTitle', icon: '🎯', description: 'gameReactionDesc', href: '/reaction' },
+  { title: 'gameMinesTitle', icon: '💣', description: 'gameMinesDesc', href: '/minesweeper' },
+  { title: 'gameMahjongTitle', icon: '🀄', description: 'gameMahjongDesc', href: '/mahjong' },
+  { title: 'gameDotsTitle', icon: '🔵', description: 'gameDotsDesc', href: '/connect-dots' },
+  { title: 'gameMergeTitle', icon: '🧩', description: 'gameMergeDesc', href: '/merge' },
+  { title: 'gameNutsTitle', icon: '🔩', description: 'gameNutsDesc', href: '/nuts-and-bolts' },
 ];
 
-const strategyGames = [
-  { title: 'Chess', icon: '♟️', description: 'The classic game of strategy', href: '/chess' },
-  { title: 'Checkers', icon: '⚫', description: 'Lead your pieces to promotion', href: '/checkers' },
-  { title: 'Reversi', icon: '⚪', description: 'Capture more pieces than your rival', href: '/reversi' },
-  { title: 'Quoridor', icon: '🚧', description: 'Race across the board and build walls', href: '/quoridor' },
-  { title: 'Detective', icon: '🔎', description: 'Study clues and solve every mystery', href: '/detective' },
-  { title: 'Sudoku', icon: '🔢', description: 'Complete every row, column, and box', href: '/sudoku' },
-  { title: 'Nonogram', icon: '🖼️', description: 'Reveal pictures using number clues', href: '/nonogram' },
-  { title: 'Wordle', icon: '🟩', description: 'Guess a hidden word in six tries', href: '/wordle' },
+const strategyGames: GameDefinition[] = [
+  { title: 'gameChessTitle', icon: '♟️', description: 'gameChessDesc', href: '/chess' },
+  { title: 'gameCheckersTitle', icon: '⚫', description: 'gameCheckersDesc', href: '/checkers' },
+  { title: 'gameReversiTitle', icon: '⚪', description: 'gameReversiDesc', href: '/reversi' },
+  { title: 'gameQuoridorTitle', icon: '🚧', description: 'gameQuoridorDesc', href: '/quoridor' },
+  { title: 'gameDetectiveTitle', icon: '🔎', description: 'gameDetectiveDesc', href: '/detective' },
+  { title: 'gameSudokuTitle', icon: '🔢', description: 'gameSudokuDesc', href: '/sudoku' },
+  { title: 'gameNonogramTitle', icon: '🖼️', description: 'gameNonogramDesc', href: '/nonogram' },
+  { title: 'gameWordleTitle', icon: '🟩', description: 'gameWordleDesc', href: '/wordle' },
 ];
 
 export function HomePage() {
   const [category, setCategory] = useState<Category>('quick');
+  const { t } = useLanguage();
+  const { loading, user } = useCurrentUser();
   const games = category === 'quick' ? quickGames : strategyGames;
+
   return (
     <main className="container home-page">
       <header className="home-header">
@@ -41,21 +48,25 @@ export function HomePage() {
         <div className="home-tools"><DailyStreak /><AccountControls /></div>
       </header>
       <section className="hero">
-        <span className="eyebrow">Your game collection</span>
-        <h1>Choose a game<br />and play</h1>
-        <p>Nineteen favorite games in one place.</p>
-        <div className="hero-actions">
-          <Link href="/register" className="hero-button hero-button--primary">Create account</Link>
-          <Link href="/login" className="hero-button hero-button--secondary">Sign in</Link>
-        </div>
+        <span className="eyebrow">{t('collection')}</span>
+        <h1>{t('chooseGame')}</h1>
+        <p>{t('collectionIntro')}</p>
+        {!loading && !user && (
+          <div className="hero-actions">
+            <Link href="/register" className="hero-button hero-button--primary">{t('createAccount')}</Link>
+            <Link href="/login" className="hero-button hero-button--secondary">{t('signIn')}</Link>
+          </div>
+        )}
       </section>
       <section className="games-section" aria-labelledby="games-title">
-        <div className="section-heading"><h2 id="games-title">Games</h2></div>
-        <div className="game-tabs" role="tablist" aria-label="Game categories">
-          <button className={category === 'quick' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('quick')} role="tab" aria-selected={category === 'quick'}>Quick games <span>11</span></button>
-          <button className={category === 'strategy' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('strategy')} role="tab" aria-selected={category === 'strategy'}>Advanced games <span>8</span></button>
+        <div className="section-heading"><h2 id="games-title">{t('games')}</h2></div>
+        <div className="game-tabs" role="tablist" aria-label={t('games')}>
+          <button className={category === 'quick' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('quick')} role="tab" aria-selected={category === 'quick'}>{t('quickGames')} <span>11</span></button>
+          <button className={category === 'strategy' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('strategy')} role="tab" aria-selected={category === 'strategy'}>{t('advancedGames')} <span>8</span></button>
         </div>
-        <div className="games-grid" role="tabpanel">{games.map((game) => <GameCard key={game.title} {...game} />)}</div>
+        <div className="games-grid" role="tabpanel">
+          {games.map((game) => <GameCard key={game.title} {...game} title={t(game.title)} description={t(game.description)} />)}
+        </div>
       </section>
     </main>
   );

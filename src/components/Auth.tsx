@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { GoogleSignInButton } from './GoogleSignInButton';
+import { useLanguage } from '../i18n/LanguageContext';
 
 type AuthProps = {
   initialMode?: AuthMode;
@@ -10,6 +11,7 @@ type AuthProps = {
 type AuthMode = 'signin' | 'signup';
 
 export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
+  const { t } = useLanguage();
   const [mode, setMode] = useState<AuthMode>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +24,7 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
     setMessage('');
 
     if (mode === 'signup' && password !== passwordConfirmation) {
-      setMessage('Passwords do not match.');
+      setMessage(t('passwordsMismatch'));
       return;
     }
 
@@ -39,12 +41,12 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
       if (result.error) {
         setMessage(result.error.message);
       } else if (mode === 'signup' && !result.data.session) {
-        setMessage('Check your email and follow the confirmation link.');
+        setMessage(t('checkEmail'));
       } else {
         onAuthenticated();
       }
     } catch {
-      setMessage('Could not connect. Check your internet connection and try again.');
+      setMessage(t('connectionError'));
     } finally {
       setBusy(false);
     }
@@ -59,18 +61,18 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
 
   return (
     <section className="auth-card">
-      <span className="eyebrow">Player account</span>
-      <h1>{mode === 'signin' ? 'Welcome back' : 'Create an account'}</h1>
+      <span className="eyebrow">{t('playerAccount')}</span>
+      <h1>{mode === 'signin' ? t('welcomeBack') : t('authCreateTitle')}</h1>
       <p className="auth-intro">
-        {mode === 'signin' ? 'Sign in to continue playing.' : 'Register with your email and password.'}
+        {mode === 'signin' ? t('signInIntro') : t('registerIntro')}
       </p>
 
       <GoogleSignInButton className="auth-google-button" />
-      <div className="auth-divider"><span>or use email</span></div>
+      <div className="auth-divider"><span>{t('orEmail')}</span></div>
 
       <form onSubmit={handleSubmit} className="auth-form">
         <label>
-          Email
+          {t('email')}
           <input
             type="email"
             autoComplete="email"
@@ -81,11 +83,11 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
           />
         </label>
         <label>
-          Password
+          {t('password')}
           <input
             type="password"
             autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
-            placeholder="At least 6 characters"
+            placeholder={t('passwordHint')}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             minLength={6}
@@ -94,7 +96,7 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
         </label>
         {mode === 'signup' && (
           <label>
-            Repeat password
+            {t('repeatPassword')}
             <input
               type="password"
               autoComplete="new-password"
@@ -106,13 +108,13 @@ export function Auth({ initialMode = 'signin', onAuthenticated }: AuthProps) {
           </label>
         )}
         <button className={`auth-submit auth-submit--${mode}`} type="submit" disabled={busy}>
-          {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+          {busy ? t('pleaseWait') : mode === 'signin' ? t('signIn') : t('createAccount')}
         </button>
       </form>
 
       {message && <p className="auth-message" role="status">{message}</p>}
       <button className={`auth-switch ${mode === 'signin' ? 'auth-switch--register' : ''}`} type="button" onClick={switchMode}>
-        {mode === 'signin' ? 'No account? Register' : 'Already registered? Sign in'}
+        {mode === 'signin' ? t('noAccount') : t('alreadyRegistered')}
       </button>
     </section>
   );
