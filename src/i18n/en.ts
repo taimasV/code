@@ -50,7 +50,7 @@ export const en = {
   supabaseHelp: 'Add your project URL and publishable key to the .env file.',
   soon: 'Soon',
   nickname: 'Nickname',
-  setNickname: 'Set nickname',
+  setNickname: 'Create nickname',
   nicknamePlaceholder: 'Your nickname',
   save: 'Save',
   cancel: 'Cancel',
