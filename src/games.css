@@ -49,21 +49,12 @@
 
 .game-panel--snake { max-width: 590px; }
 .snake-board { position: relative; width: min(100%, 520px); aspect-ratio: 1; margin: 0 auto 18px; border: 8px solid #d6d1c5; border-radius: 15px; overflow: hidden; background-color: #f9f6ef; background-image: linear-gradient(#e7e2d8 1px, transparent 1px), linear-gradient(90deg, #e7e2d8 1px, transparent 1px); background-size: 6.25% 6.25%; }
-.snake-board--free { cursor: crosshair; background-image: radial-gradient(circle at center, rgba(71, 124, 117, .08), transparent 65%); }
 .snake-part, .snake-food { position: absolute; top: 0; left: 0; width: 6.25%; height: 6.25%; will-change: transform; }
 .snake-part { z-index: 2; border: 1px solid rgba(255, 255, 255, .32); border-radius: 20%; transition: transform 120ms linear; }
-.snake-board--free .snake-part { border-radius: 16%; transition-duration: 42ms; }
-.snake-board--free .snake-food { transition-duration: 42ms; }
-.snake-part--teleport { transition: none; }
 .snake-part--player { background: #477c75; }
-.snake-part--bot-one { background: #d26a4a; }
-.snake-part--bot-two { background: #7963a6; }
-.snake-part--bot-three { background: #d6a13e; }
-.snake-part--bot-four { background: #4f79b8; }
-.snake-part--bot-five { background: #a85287; }
 .snake-part--head { z-index: 3; border-radius: 30%; }
 .snake-part--head::after { content: ''; position: absolute; width: 24%; height: 24%; top: 18%; right: 16%; border-radius: 50%; background: #fff; }
-.snake-food { z-index: 1; display: grid; place-items: center; font-size: clamp(11px, 2.2vw, 20px); line-height: 1; transition: transform 120ms ease; }
+.snake-food { z-index: 1; display: flex; align-items: center; justify-content: center; overflow: visible; font-size: clamp(18px, 5.5vw, 32px); line-height: 1; text-align: center; transition: transform 120ms ease; }
 .snake-actions { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
 .snake-controls { display: grid; grid-template-columns: repeat(3, 48px); grid-template-rows: repeat(2, 42px); justify-content: center; gap: 5px; margin: 0 auto 12px; }
 .snake-control { border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); cursor: pointer; font-size: 20px; font-weight: 900; }

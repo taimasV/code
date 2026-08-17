@@ -14,6 +14,13 @@ import { ReactionPage } from './pages/ReactionPage';
 import { MahjongPage } from './pages/MahjongPage';
 import { ConnectDotsPage } from './pages/ConnectDotsPage';
 import { AuthPage } from './pages/AuthPage';
+import { SudokuPage } from './pages/SudokuPage';
+import { NonogramPage } from './pages/NonogramPage';
+import { WordlePage } from './pages/WordlePage';
+import { QuoridorPage } from './pages/QuoridorPage';
+import { DetectivePage } from './pages/DetectivePage';
+import { MergePage } from './pages/MergePage';
+import { NutsAndBoltsPage } from './pages/NutsAndBoltsPage';
 
 export default function App() {
   return (
@@ -31,6 +38,13 @@ export default function App() {
       <Route path="/reaction" component={ReactionPage} />
       <Route path="/mahjong" component={MahjongPage} />
       <Route path="/connect-dots" component={ConnectDotsPage} />
+      <Route path="/sudoku" component={SudokuPage} />
+      <Route path="/nonogram" component={NonogramPage} />
+      <Route path="/wordle" component={WordlePage} />
+      <Route path="/quoridor" component={QuoridorPage} />
+      <Route path="/detective" component={DetectivePage} />
+      <Route path="/merge" component={MergePage} />
+      <Route path="/nuts-and-bolts" component={NutsAndBoltsPage} />
       <Route path="/login"><AuthPage mode="signin" /></Route>
       <Route path="/register"><AuthPage mode="signup" /></Route>
       <Route path="/auth"><AuthPage mode="signin" /></Route>

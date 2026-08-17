@@ -37,9 +37,9 @@ export function ConnectDotsPage() {
           </select>
           <button className="mine-tool" disabled={levelIndex === difficultyEnd} onClick={() => start(levelIndex + 1)}>→</button>
         </div>
-        <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? 'Board complete! 🎉' : `Connected: ${connected}/${level.pairs.length} · Filled: ${filled}/${level.size ** 2}`}</p>
+        <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? 'All dots connected! 🎉' : `Connected: ${connected}/${level.pairs.length} · Filled: ${filled}/${level.size ** 2}`}</p>
         <ConnectDotsBoard level={level} paths={paths} onPathsChange={setPaths} />
-        <p className="game-hint">Connect every matching pair without crossing lines. Every cell must be filled to win.</p>
+        <p className="game-hint">Connect every matching pair without crossing lines. Each puzzle has one path layout, and it covers the whole board.</p>
         <div className="chess-actions">
           <button className="mine-tool" onClick={() => start()}>Reset paths</button>
           {won && levelIndex < difficultyEnd && <button className="restart-button" onClick={() => start(levelIndex + 1)}>Next level →</button>}

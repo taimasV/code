@@ -1,0 +1,31 @@
+.game-panel--detective { max-width: 720px; }
+.detective-case { text-align: left; }
+.detective-scene, .detective-clues, .detective-question, .detective-explanation, .detective-result { padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+.detective-scene { margin-bottom: 12px; border-left: 5px solid var(--accent); }
+.detective-scene span { color: var(--accent); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.detective-scene h2, .detective-question h3, .detective-clues h3 { margin: 5px 0 8px; }
+.detective-scene p, .detective-explanation { margin-bottom: 0; color: var(--soft); line-height: 1.55; }
+.detective-meta { display: flex; flex-wrap: wrap; gap: 7px 14px; margin: 8px 0 12px; color: var(--soft); font-size: 12px; font-weight: 700; }
+.detective-photo { margin: 0 0 12px; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #272521; }
+.detective-photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.detective-photo figcaption { padding: 8px 12px; color: #eee9df; font-size: 11px; letter-spacing: .03em; text-align: center; }
+.detective-interrogation { margin-bottom: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 15px; background: #f7f3ea; text-align: center; }
+.detective-people { display: grid; gap: 8px; margin-top: 12px; text-align: left; }
+.detective-person { padding: 12px; border-radius: 11px; background: var(--card); }
+.detective-person > div { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.detective-person span { color: var(--soft); font-size: 11px; }
+.detective-person p { margin: 9px 0 0; color: var(--soft); font-size: 13px; line-height: 1.5; }
+.detective-person .mine-tool { margin-top: 9px; }
+.detective-clues { margin-bottom: 12px; background: #f7f3ea; }
+.detective-clues ol { display: grid; gap: 8px; margin: 10px 0 14px; padding-left: 24px; color: var(--soft); }
+.detective-clues li::marker { color: var(--accent); font-weight: 900; }
+.detective-answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.detective-answer { padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f3ea; color: var(--ink); cursor: pointer; font-weight: 750; }
+.detective-answer:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.detective-answer--wrong { border-color: #d99589; background: #f7dfdb; color: #a13e31; }
+.detective-answer--correct { border-color: #8dab83; background: #e4eddf; color: #38623d; }
+.detective-explanation { margin: 12px 0 16px; color: var(--ink); }
+.detective-result { padding: 38px 20px; text-align: center; }
+.detective-result > span { font-size: 52px; }
+.detective-result h2 { margin: 10px 0 6px; }
+@media (max-width: 520px) { .detective-answers { grid-template-columns: 1fr; } }

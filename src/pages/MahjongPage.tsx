@@ -48,13 +48,13 @@ export function MahjongPage() {
         <div className="difficulty-tabs" aria-label="Difficulty">
           {MAHJONG_LEVELS.map((option, index) => (
             <button className={levelIndex === index ? 'difficulty-tab difficulty-tab--active' : 'difficulty-tab'} key={option.label} onClick={() => start(index)}>
-              {option.label} <span>{option.rows.reduce((sum, row) => sum + row, 0)} tiles</span>
+              {option.label} <span>{option.positions.length} tiles</span>
             </button>
           ))}
         </div>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? `Board cleared in ${pairs} pairs! 🎉` : `Pairs removed: ${pairs}`}</p>
         <MahjongBoard level={level} tiles={tiles} selected={selected} onTileClick={chooseTile} />
-        <p className="game-hint">Match identical open tiles. A tile is open when it is at either end of its row.</p>
+        <p className="game-hint">Match identical open tiles. A tile must have nothing above it and at least one free side.</p>
         <div className="chess-actions"><button className="restart-button" onClick={() => start()}>New layout</button><button className="mine-tool" onClick={() => setTiles(shuffleRemainingTiles(tiles))}>Shuffle</button></div>
       </section>
     </main>

@@ -1,0 +1,17 @@
+.game-panel--merge { max-width: 610px; }
+.merge-collection { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin: 0 auto 14px; max-width: 500px; }
+.merge-discovery { display: grid; place-items: center; position: relative; aspect-ratio: 1; border: 1px dashed var(--line); border-radius: 10px; background: #eee9df; color: #aaa399; }
+.merge-discovery--open { border-style: solid; background: var(--card); color: var(--ink); }
+.merge-discovery span { font-size: clamp(14px, 4vw, 25px); }
+.merge-discovery small { position: absolute; right: 4px; bottom: 2px; font-size: 9px; font-weight: 900; }
+.merge-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: min(100%, 500px); margin: 0 auto 13px; padding: 10px; border-radius: 18px; background: #d8d1c3; }
+.merge-cell { display: grid; place-items: center; position: relative; aspect-ratio: 1; min-width: 0; padding: 0; border: 2px solid transparent; border-radius: 13px; background: #eee9df; cursor: pointer; transition: transform .22s ease, border-color .22s ease, background-color .22s ease, box-shadow .22s ease; }
+.merge-cell--filled { background: #fffaf1; box-shadow: 0 2px 5px rgba(67, 53, 37, .13); }
+.merge-cell--selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 6px 12px rgba(71, 124, 117, .2); transform: translateY(-3px) scale(1.03); }
+.merge-item { display: grid; place-items: center; width: 100%; height: 100%; animation: merge-pop .32s cubic-bezier(.2, .8, .3, 1.25); }
+.merge-item > span { font-size: clamp(27px, 8vw, 48px); line-height: 1; }
+.merge-item > small { position: absolute; right: 5px; bottom: 3px; color: var(--soft); font-size: 10px; font-weight: 900; }
+.merge-actions { display: flex; justify-content: center; gap: 8px; }
+@keyframes merge-pop { 0% { opacity: .35; transform: scale(.55) rotate(-5deg); } 70% { opacity: 1; transform: scale(1.1) rotate(2deg); } 100% { transform: scale(1) rotate(0); } }
+@media (prefers-reduced-motion: reduce) { .merge-cell { transition: none; } .merge-item { animation: none; } }
+@media (max-width: 480px) { .merge-board { gap: 5px; padding: 7px; } .merge-collection { gap: 3px; } }

@@ -1,0 +1,75 @@
+import { useState } from 'react';
+import { GamePageHeader } from '../components/GamePageHeader';
+import { GameRules } from '../components/GameRules';
+import { NutsAndBoltsBoard } from '../components/NutsAndBoltsBoard';
+import { NutsDifficultySelect } from '../components/NutsDifficultySelect';
+import { canMoveNut, createNutsBoard, isNutsPuzzleSolved, moveNut, type NutsBoard, type NutsDifficulty } from '../lib/nutsAndBolts';
+
+export function NutsAndBoltsPage() {
+  const [difficulty, setDifficulty] = useState<NutsDifficulty>('easy');
+  const [board, setBoard] = useState(() => createNutsBoard('easy'));
+  const [selected, setSelected] = useState<number | null>(null);
+  const [history, setHistory] = useState<NutsBoard[]>([]);
+  const solved = isNutsPuzzleSolved(board);
+
+  function selectBolt(bolt: number) {
+    if (solved) return;
+    if (selected === null) {
+      if (board[bolt].length > 0) setSelected(bolt);
+      return;
+    }
+    if (selected === bolt) {
+      setSelected(null);
+      return;
+    }
+    if (canMoveNut(board, selected, bolt)) {
+      setHistory((current) => [...current, board]);
+      setBoard(moveNut(board, selected, bolt));
+      setSelected(null);
+      return;
+    }
+    if (board[bolt].length > 0) setSelected(bolt);
+  }
+
+  function undo() {
+    const previous = history[history.length - 1];
+    if (!previous) return;
+    setBoard(previous);
+    setHistory((current) => current.slice(0, -1));
+    setSelected(null);
+  }
+
+  function restart() {
+    setBoard(createNutsBoard(difficulty));
+    setHistory([]);
+    setSelected(null);
+  }
+
+  function changeDifficulty(nextDifficulty: NutsDifficulty) {
+    setDifficulty(nextDifficulty);
+    setBoard(createNutsBoard(nextDifficulty));
+    setHistory([]);
+    setSelected(null);
+  }
+
+  return (
+    <main className="container game-page">
+      <GamePageHeader number="19" />
+      <section className="game-panel game-panel--nuts">
+        <span className="game-icon" aria-hidden="true">🔩</span>
+        <h1>Nuts and Bolts</h1>
+        <p className={`game-status ${solved ? 'game-status--winner' : ''}`}>
+          {solved ? `Sorted in ${history.length} moves! 🎉` : `Moves: ${history.length}`}
+        </p>
+        <NutsDifficultySelect value={difficulty} onChange={changeDifficulty} />
+        <GameRules rules={['Choose a bolt to pick up its top nut.', 'Move it to an empty bolt or onto the same color.', 'Sort every color onto its own bolt.']} />
+        <NutsAndBoltsBoard board={board} selected={selected} onSelect={selectBolt} />
+        <p className="game-hint">{selected === null ? 'Choose a bolt.' : 'Now choose where to move the top nut.'}</p>
+        <div className="nuts-actions">
+          <button className="mine-tool" disabled={history.length === 0} onClick={undo}>Undo</button>
+          <button className="restart-button" onClick={restart}>Restart</button>
+        </div>
+      </section>
+    </main>
+  );
+}
