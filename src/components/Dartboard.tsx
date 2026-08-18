@@ -3,6 +3,12 @@ import { dartNumbers, scoreDart, type DartThrow } from '../lib/darts';
 
 type DartboardProps = { disabled: boolean; throws: DartThrow[]; onThrow: (result: DartThrow) => void };
 type AimPhase = 'horizontal' | 'vertical';
+const CENTER_ASSIST_RANGE = 0.09;
+
+function assistTowardCenter(position: number) {
+  if (Math.abs(position - 0.5) > CENTER_ASSIST_RANGE) return position;
+  return position + (0.5 - position) * 0.65;
+}
 
 function useMovingAim(active: boolean, phase: AimPhase) {
   const [position, setPosition] = useState(0.08);
@@ -12,7 +18,7 @@ function useMovingAim(active: boolean, phase: AimPhase) {
     let frame = 0;
     const startedAt = performance.now();
     const update = (now: number) => {
-      const progress = ((now - startedAt) % 1800) / 1800;
+      const progress = ((now - startedAt) % 2300) / 2300;
       const wave = progress <= 0.5 ? progress * 2 : (1 - progress) * 2;
       setPosition(0.08 + wave * 0.84);
       frame = requestAnimationFrame(update);
@@ -34,11 +40,11 @@ export function Dartboard({ disabled, throws, onThrow }: DartboardProps) {
   function lockOrThrow() {
     if (disabled) return;
     if (phase === 'horizontal') {
-      setLockedX(aim);
+      setLockedX(assistTowardCenter(aim));
       setPhase('vertical');
       return;
     }
-    onThrow(scoreDart(targetX, targetY));
+    onThrow(scoreDart(targetX, assistTowardCenter(targetY)));
     setLockedX(null);
     setPhase('horizontal');
   }
