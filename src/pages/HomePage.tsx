@@ -22,6 +22,9 @@ const quickGames: GameDefinition[] = [
   { title: 'gameDotsTitle', icon: '🔵', description: 'gameDotsDesc', href: '/connect-dots' },
   { title: 'gameMergeTitle', icon: '🧩', description: 'gameMergeDesc', href: '/merge' },
   { title: 'gameNutsTitle', icon: '🔩', description: 'gameNutsDesc', href: '/nuts-and-bolts' },
+  { title: 'gameFlagsTitle', icon: '🌍', description: 'gameFlagsDesc', href: '/flags' },
+  { title: 'gameDartsTitle', icon: '🎯', description: 'gameDartsDesc', href: '/darts' },
+  { title: 'gameYatzyTitle', icon: '🎲', description: 'gameYatzyDesc', href: '/yatzy' },
 ];
 
 const strategyGames: GameDefinition[] = [
@@ -61,7 +64,7 @@ export function HomePage() {
       <section className="games-section" aria-labelledby="games-title">
         <div className="section-heading"><h2 id="games-title">{t('games')}</h2></div>
         <div className="game-tabs" role="tablist" aria-label={t('games')}>
-          <button className={category === 'quick' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('quick')} role="tab" aria-selected={category === 'quick'}>{t('quickGames')} <span>11</span></button>
+          <button className={category === 'quick' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('quick')} role="tab" aria-selected={category === 'quick'}>{t('quickGames')} <span>14</span></button>
           <button className={category === 'strategy' ? 'game-tab game-tab--active' : 'game-tab'} onClick={() => setCategory('strategy')} role="tab" aria-selected={category === 'strategy'}>{t('advancedGames')} <span>8</span></button>
         </div>
         <div className="games-grid" role="tabpanel">

@@ -1,4 +1,5 @@
 export type MahjongTile = { id: number; removed: boolean; symbol: string };
+export type MahjongTileColor = 'red' | 'blue' | 'green' | 'purple';
 export type MahjongPosition = { x: number; y: number; z: number };
 export type MahjongLevel = {
   columns: number;
@@ -31,6 +32,11 @@ export const MAHJONG_LEVELS: MahjongLevel[] = [
 ];
 
 const symbols = ['🀀', '🀁', '🀂', '🀃', '🀄', '🀅', '🀆', '🀇', '🀈', '🀉', '🀊', '🀋', '🀌', '🀍', '🀎', '🀏', '🀐', '🀑', '🀒', '🀓', '🀔', '🀕', '🀖', '🀗'];
+const tileColors: MahjongTileColor[] = ['red', 'blue', 'green', 'purple'];
+
+export function getMahjongTileColor(symbol: string) {
+  return tileColors[(symbol.codePointAt(0) ?? 0) % tileColors.length];
+}
 
 export function createMahjongTiles(level: MahjongLevel): MahjongTile[] {
   const pairs = Array.from({ length: level.positions.length / 2 }, (_, index) => symbols[index % symbols.length]);

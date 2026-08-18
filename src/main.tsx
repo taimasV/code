@@ -9,6 +9,8 @@ import './quoridor.css';
 import './detective.css';
 import './merge.css';
 import './nuts-and-bolts.css';
+import './flags.css';
+import './arcade-games.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { MahjongBoard } from '../components/MahjongBoard';
+import { MahjongHotbar, type HotbarTile } from '../components/MahjongHotbar';
 import { GameWinStreakBadge } from '../components/GameWinStreak';
 import {
   MAHJONG_LEVELS, createMahjongTiles, hasMahjongMove,
-  removeMahjongPair, shuffleRemainingTiles,
+  shuffleRemainingTiles,
 } from '../lib/mahjong';
 import { useGameAttempt } from '../lib/useGameAttempt';
 
@@ -12,34 +13,54 @@ export function MahjongPage() {
   const [levelIndex, setLevelIndex] = useState(0);
   const level = MAHJONG_LEVELS[levelIndex];
   const [tiles, setTiles] = useState(() => createMahjongTiles(level));
-  const [selected, setSelected] = useState<number | null>(null);
+  const [hotbar, setHotbar] = useState<HotbarTile[]>([]);
   const [pairs, setPairs] = useState(0);
+  const [score, setScore] = useState(0);
   const { attemptId, startNewAttempt } = useGameAttempt();
-  const won = tiles.every((tile) => tile.removed);
+  const matchingIds = hotbar.filter((tile) => tile.matched).map((tile) => tile.id);
+  const matchingKey = matchingIds.join(',');
+  const atCapacity = hotbar.length >= 4;
+  const barFull = atCapacity && matchingIds.length === 0;
+  const won = tiles.every((tile) => tile.removed) && hotbar.length === 0;
 
   useEffect(() => {
-    if (!won && !hasMahjongMove(tiles, level)) setTiles((current) => shuffleRemainingTiles(current));
-  }, [level, tiles, won]);
+    if (matchingIds.length === 0) return;
+    const timer = window.setTimeout(() => {
+      const matched = new Set(matchingIds);
+      setHotbar((current) => current.filter((tile) => !matched.has(tile.id)));
+      setPairs((current) => current + matchingIds.length / 2);
+      setScore((current) => current + matchingIds.length * 50);
+    }, 480);
+    return () => window.clearTimeout(timer);
+  }, [matchingKey]);
+
+  useEffect(() => {
+    const hasBoardTiles = tiles.some((tile) => !tile.removed);
+    if (hasBoardTiles && !atCapacity && !hasMahjongMove(tiles, level)) {
+      setTiles((current) => shuffleRemainingTiles(current));
+    }
+  }, [atCapacity, level, tiles]);
 
   function chooseTile(index: number) {
-    if (selected === null) {
-      setSelected(index);
-      return;
-    }
-    const next = removeMahjongPair(tiles, selected, index);
-    if (next) {
-      setTiles(next);
-      setPairs((current) => current + 1);
-      setSelected(null);
-    } else setSelected(index);
+    if (atCapacity || tiles[index].removed) return;
+    const picked = tiles[index];
+    setTiles((current) => current.map((tile, tileIndex) => tileIndex === index ? { ...tile, removed: true } : tile));
+    setHotbar((current) => {
+      const pair = current.find((tile) => !tile.matched && tile.symbol === picked.symbol);
+      if (!pair) return [...current, { id: picked.id, matched: false, symbol: picked.symbol }];
+      return current
+        .map((tile) => tile.id === pair.id ? { ...tile, matched: true } : tile)
+        .concat({ id: picked.id, matched: true, symbol: picked.symbol });
+    });
   }
 
   function start(nextIndex = levelIndex) {
     const nextLevel = MAHJONG_LEVELS[nextIndex];
     setLevelIndex(nextIndex);
     setTiles(createMahjongTiles(nextLevel));
-    setSelected(null);
+    setHotbar([]);
     setPairs(0);
+    setScore(0);
     startNewAttempt();
   }
 
@@ -56,10 +77,11 @@ export function MahjongPage() {
             </button>
           ))}
         </div>
-        <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? `Board cleared in ${pairs} pairs! 🎉` : `Pairs removed: ${pairs}`}</p>
+        <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? `Board cleared! Score: ${score} 🎉` : barFull ? `Hot bar is full — score: ${score}` : `Score: ${score} · Pairs: ${pairs}`}</p>
         <GameWinStreakBadge active attemptId={attemptId} game="mahjong" result={won ? 'win' : null} />
-        <MahjongBoard level={level} tiles={tiles} selected={selected} onTileClick={chooseTile} />
-        <p className="game-hint">Match identical open tiles. A tile must have nothing above it and at least one free side.</p>
+        <MahjongBoard level={level} locked={atCapacity} tiles={tiles} onTileClick={chooseTile} />
+        <MahjongHotbar tiles={hotbar} />
+        <p className="game-hint">Move open tiles to the hot bar. Two identical tiles disappear and give 100 points.</p>
         <div className="chess-actions"><button className="restart-button" onClick={() => start()}>New layout</button><button className="mine-tool" onClick={() => setTiles(shuffleRemainingTiles(tiles))}>Shuffle</button></div>
       </section>
     </main>

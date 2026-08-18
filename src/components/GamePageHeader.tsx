@@ -6,7 +6,7 @@ export function GamePageHeader({ number }: { number: string }) {
   return (
     <header className="game-header">
       <Link href="/games" className="back-link">{t('allGames')}</Link>
-      <span className="game-number">{number} / 19</span>
+      <span className="game-number">{number} / 22</span>
     </header>
   );
 }

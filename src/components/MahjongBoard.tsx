@@ -1,10 +1,10 @@
 import type { CSSProperties } from 'react';
-import { getOpenMahjongTiles, type MahjongLevel, type MahjongPosition, type MahjongTile } from '../lib/mahjong';
+import { getMahjongTileColor, getOpenMahjongTiles, type MahjongLevel, type MahjongPosition, type MahjongTile } from '../lib/mahjong';
 
 type MahjongBoardProps = {
   level: MahjongLevel;
+  locked: boolean;
   onTileClick: (index: number) => void;
-  selected: number | null;
   tiles: MahjongTile[];
 };
 
@@ -17,7 +17,7 @@ function tileStyle(position: MahjongPosition): CSSProperties {
   };
 }
 
-export function MahjongBoard({ level, onTileClick, selected, tiles }: MahjongBoardProps) {
+export function MahjongBoard({ level, locked, onTileClick, tiles }: MahjongBoardProps) {
   const open = getOpenMahjongTiles(tiles, level);
   return (
     <div
@@ -30,11 +30,12 @@ export function MahjongBoard({ level, onTileClick, selected, tiles }: MahjongBoa
     >
       {tiles.map((tile, index) => {
         const position = level.positions[index];
+        const color = getMahjongTileColor(tile.symbol);
         return (
           <button
             aria-label={`${tile.symbol}${open.has(index) ? ', open' : ', blocked'}, layer ${position.z + 1}`}
-            className={`mahjong-tile ${tile.removed ? 'mahjong-tile--removed' : ''} ${selected === index ? 'mahjong-tile--selected' : ''}`}
-            disabled={tile.removed || !open.has(index)}
+            className={`mahjong-tile mahjong-tile--${color} ${tile.removed ? 'mahjong-tile--removed' : ''}`}
+            disabled={tile.removed || locked || !open.has(index)}
             key={tile.id}
             onClick={() => onTileClick(index)}
             style={tileStyle(position)}

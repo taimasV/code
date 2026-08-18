@@ -1,0 +1,58 @@
+.game-panel--darts { max-width: 700px; }
+.darts-cabinet { position: relative; margin-bottom: 18px; padding: 22px 22px 14px; overflow: hidden; border: 8px solid #61412d; border-radius: 28px; background-color: #8a5b3b; background-image: repeating-linear-gradient(96deg, rgba(255,255,255,.045) 0 3px, transparent 3px 38px), linear-gradient(145deg, #9d6b47, #70472f); box-shadow: inset 0 0 0 2px #b9855f, inset 0 0 35px rgba(45,24,13,.3), 0 18px 35px rgba(56,40,30,.18); }
+.darts-cabinet::before, .darts-cabinet::after { position: absolute; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: #d1a66f; box-shadow: inset 0 1px 2px #6e472e; content: ''; }
+.darts-cabinet::before { left: 18px; }
+.darts-cabinet::after { right: 18px; }
+.darts-cabinet__brand { margin: 0 auto 13px; color: #fff4d4; font-family: Georgia, serif; font-size: 13px; font-weight: 900; letter-spacing: .16em; text-shadow: 0 2px 2px rgba(45,24,13,.5); }
+.darts-cabinet__brand span { color: #e3bb55; }
+.darts-stats, .darts-history, .yatzy-total { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.darts-stats span { min-width: 100px; padding: 8px 12px; border: 1px solid #171715; border-radius: 8px; background: linear-gradient(#292a27, #171816); color: #d6d2c8; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; box-shadow: inset 0 1px 0 rgba(255,255,255,.1); }
+.darts-stats strong { display: block; margin-top: 2px; color: #f3c863; font-family: ui-monospace, monospace; font-size: 19px; letter-spacing: 0; }
+.dartboard { position: relative; display: block; width: min(100%, 470px); aspect-ratio: 1; margin: 0 auto 16px; padding: 0; overflow: hidden; border: 15px solid #292825; border-radius: 50%; background: radial-gradient(circle, #d8584b 0 6%, #4a9b68 6% 13%, transparent 13% 52%, rgba(72,155,104,.94) 52% 60%, transparent 60% 87%, rgba(216,88,75,.94) 87% 96%, #252422 96%), repeating-conic-gradient(from -9deg, #eee5d2 0 9deg, #34322f 9deg 18deg); box-shadow: 0 0 0 5px #191918, 0 13px 25px rgba(37,22,13,.42), inset 0 0 12px rgba(0,0,0,.75); cursor: crosshair; }
+.dartboard:disabled { cursor: default; }
+.dart-number { position: absolute; z-index: 2; display: grid; width: 28px; height: 28px; place-items: center; transform: translate(-50%, -50%); color: #fff; font-size: 12px; font-weight: 900; text-shadow: 0 1px 2px #000; pointer-events: none; }
+.dart-mark { position: absolute; z-index: 3; display: grid; width: 24px; height: 24px; place-items: center; transform: translate(-50%, -50%); border: 2px solid #fff; border-radius: 50%; background: linear-gradient(145deg, #a478d2, #70439f); color: #fff; font-size: 10px; font-weight: 900; box-shadow: 0 3px 6px rgba(0,0,0,.4); pointer-events: none; }
+.dart-mark::after { position: absolute; left: 20px; width: 26px; height: 5px; border-radius: 0 4px 4px 0; background: #d7dae0; content: ''; box-shadow: 9px -5px 0 -1px #8b63b8, 9px 5px 0 -1px #8b63b8; }
+.darts-history { min-height: 34px; margin: 0; padding: 8px; border: 1px solid rgba(54,31,17,.45); border-radius: 10px; background: rgba(48,27,15,.28); }
+.darts-history span { padding: 5px 8px; border-radius: 6px; background: rgba(255,248,228,.9); color: #55351f; font-size: 12px; font-weight: 800; }
+.darts-history .darts-empty { background: transparent; color: #f2dcc2; font-weight: 600; }
+
+.game-panel--yatzy { max-width: 760px; }
+.yatzy-table { position: relative; margin-bottom: 22px; padding: 36px 22px 18px; overflow: hidden; border: 6px solid #78509f; border-radius: 26px; background-color: #9a72bd; background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px), linear-gradient(145deg, rgba(255,255,255,.13), rgba(73,39,102,.12)); background-size: 15px 15px, 100% 100%; box-shadow: inset 0 0 0 2px #b994d5, inset 0 0 35px rgba(61,32,87,.2), 0 16px 30px rgba(76,48,98,.16); }
+.yatzy-table__label { position: absolute; top: 10px; left: 0; width: 100%; color: #f7edff; font-size: 10px; font-weight: 900; letter-spacing: .22em; }
+.yatzy-dice { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; perspective: 500px; }
+.yatzy-die { position: relative; width: 78px; aspect-ratio: 1; padding: 11px; border: 1px solid #d8d0df; border-radius: 17px; background: linear-gradient(145deg, #fff, #eee9f1); cursor: pointer; box-shadow: inset -4px -5px 8px rgba(74,58,84,.1), inset 3px 3px 5px rgba(255,255,255,.9), 0 9px 0 #cfc5d5, 0 13px 18px rgba(52,28,70,.25); transition: transform .18s, box-shadow .18s; }
+.yatzy-die:hover:not(:disabled) { transform: translateY(-3px) rotate(-2deg); }
+.yatzy-die__face { display: grid; width: 100%; height: 100%; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); place-items: center; }
+.yatzy-pip { width: 12px; height: 12px; border-radius: 50%; opacity: 0; }
+.yatzy-pip--visible { opacity: 1; background: radial-gradient(circle at 35% 30%, #725292, #35273f 75%); box-shadow: inset 0 1px 2px rgba(0,0,0,.35); }
+.yatzy-die--held { border-color: #f1cc67; background: linear-gradient(145deg, #fff9dc, #f2df9e); transform: translateY(-7px); box-shadow: inset -4px -5px 8px rgba(110,82,17,.1), 0 7px 0 #d4b85f, 0 14px 20px rgba(52,28,70,.28), 0 0 0 3px rgba(255,221,117,.38); }
+.yatzy-die--held::after { position: absolute; right: -5px; bottom: -5px; padding: 3px 5px; border-radius: 5px; background: #6f3fa4; color: #fff; content: 'HELD'; font-size: 8px; font-weight: 900; letter-spacing: .08em; }
+.yatzy-die:disabled { cursor: default; }
+.yatzy-roll { min-width: 170px; background: #fff4ca; color: #563978; box-shadow: 0 6px 0 #d3b95d, 0 10px 15px rgba(58,34,76,.2); }
+.yatzy-roll span { margin-left: 5px; opacity: .65; font-size: 11px; }
+.yatzy-roll:hover { filter: none; transform: translateY(-1px); box-shadow: 0 5px 0 #d3b95d, 0 8px 12px rgba(58,34,76,.2); }
+.yatzy-roll:disabled { opacity: .55; cursor: default; }
+.yatzy-table .game-hint { margin: 16px 0 0; color: #f3e9fa; }
+.yatzy-scorecard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin: 18px 0; padding: 14px; border: 1px solid #c7b8da; border-radius: 18px; background: rgba(255,255,255,.42); text-align: left; }
+.yatzy-score { position: relative; display: flex; min-height: 46px; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px 10px 15px; overflow: hidden; border: 1px solid #c7b8da; border-radius: 11px; background: linear-gradient(135deg, #fbf8ff, #eee5f8); color: var(--ink); cursor: pointer; box-shadow: 0 3px 8px rgba(76,48,98,.08); }
+.yatzy-score::before { position: absolute; inset: 0 auto 0 0; width: 4px; background: #8b63b8; content: ''; }
+.yatzy-score:hover:not(:disabled) { border-color: #8b63b8; transform: translateY(-1px); box-shadow: 0 5px 12px rgba(76,48,98,.14); }
+.yatzy-score:disabled { cursor: default; }
+.yatzy-score strong { display: grid; min-width: 34px; height: 28px; place-items: center; border-radius: 8px; background: #e2d3f1; color: #6f3fa4; }
+.yatzy-score--saved { border-color: #9bbd9d; background: linear-gradient(135deg, #f6fbf5, #e4f0e3); }
+.yatzy-score--saved::before { background: #57915c; }
+.yatzy-score--saved strong { background: #cee4cf; color: #35673a; }
+.yatzy-total span { padding: 9px 13px; border: 1px solid #bda7d5; border-radius: 10px; background: #f2eafb; color: var(--soft); font-size: 13px; }
+.yatzy-total strong { margin-left: 4px; color: #6f3fa4; font-size: 17px; }
+
+@media (max-width: 520px) {
+  .darts-cabinet { padding: 18px 9px 10px; border-width: 5px; }
+  .dartboard { border-width: 9px; }
+  .darts-stats span { min-width: 82px; padding-inline: 7px; }
+  .yatzy-table { padding-inline: 10px; border-width: 4px; }
+  .yatzy-dice { gap: 8px; }
+  .yatzy-die { width: 55px; padding: 8px; border-radius: 12px; box-shadow: inset -3px -4px 6px rgba(74,58,84,.1), 0 6px 0 #cfc5d5, 0 9px 12px rgba(52,28,70,.22); }
+  .yatzy-pip { width: 9px; height: 9px; }
+  .yatzy-scorecard { grid-template-columns: 1fr; }
+}

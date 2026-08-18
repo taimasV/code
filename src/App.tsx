@@ -22,6 +22,9 @@ import { QuoridorPage } from './pages/QuoridorPage';
 import { DetectivePage } from './pages/DetectivePage';
 import { MergePage } from './pages/MergePage';
 import { NutsAndBoltsPage } from './pages/NutsAndBoltsPage';
+import { FlagsPage } from './pages/FlagsPage';
+import { DartsPage } from './pages/DartsPage';
+import { YatzyPage } from './pages/YatzyPage';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 export default function App() {
@@ -48,6 +51,9 @@ export default function App() {
       <Route path="/detective" component={DetectivePage} />
       <Route path="/merge" component={MergePage} />
       <Route path="/nuts-and-bolts" component={NutsAndBoltsPage} />
+      <Route path="/flags" component={FlagsPage} />
+      <Route path="/darts" component={DartsPage} />
+      <Route path="/yatzy" component={YatzyPage} />
       <Route path="/login"><AuthPage mode="signin" /></Route>
       <Route path="/register"><AuthPage mode="signup" /></Route>
       <Route path="/auth"><AuthPage mode="signin" /></Route>

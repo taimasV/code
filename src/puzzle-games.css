@@ -1,10 +1,23 @@
 .game-panel--mahjong { max-width: 840px; }
-.mahjong-board { display: grid; width: min(100%, 760px); min-height: 280px; margin: 12px auto 24px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: #dce9dc; isolation: isolate; }
-.mahjong-tile { position: relative; width: calc(100% - 5px); height: calc(100% - 5px); min-width: 0; padding: 0; border: 1px solid #c8bda8; border-radius: 8px; background: #fffaf0; color: #34302b; cursor: pointer; font-family: 'Segoe UI Symbol', serif; font-size: clamp(19px, 4vw, 38px); box-shadow: 3px 4px 0 #a99d88, 5px 7px 8px rgba(63, 53, 42, .2); transition: filter .15s, opacity .2s, translate .15s; }
+.mahjong-board { display: grid; width: min(100%, 760px); min-height: 280px; margin: 12px auto 24px; padding: 24px; border: 1px solid #b8cdb8; border-radius: 18px; background: linear-gradient(145deg, #dcebdc, #c9dfcf); box-shadow: inset 0 0 30px rgba(54, 102, 70, .12); isolation: isolate; }
+.mahjong-tile { position: relative; width: calc(100% - 5px); height: calc(100% - 5px); min-width: 0; padding: 0; border: 1px solid #d1c2a8; border-radius: 8px; background: linear-gradient(145deg, #fffdf7, #f7ead3); color: #34302b; cursor: pointer; font-family: 'Segoe UI Symbol', serif; font-size: clamp(19px, 4vw, 38px); font-weight: 800; -webkit-text-stroke: .55px currentColor; text-shadow: 0 1px 0 #fff; box-shadow: 3px 4px 0 #b09b7c, 5px 7px 8px rgba(63, 53, 42, .2); transition: filter .15s, opacity .2s, translate .15s; }
+.mahjong-tile--red { color: #c9483e; }
+.mahjong-tile--blue { color: #356da8; }
+.mahjong-tile--green { color: #3f8058; }
+.mahjong-tile--purple { color: #81589d; }
 .mahjong-tile:hover:not(:disabled) { translate: 0 -3px; }
 .mahjong-tile--selected { outline: 4px solid var(--accent); translate: 0 -4px; }
 .mahjong-tile--removed { visibility: hidden; pointer-events: none; }
 .mahjong-tile:disabled:not(.mahjong-tile--removed) { cursor: default; filter: brightness(.83); opacity: .66; }
+.mahjong-hotbar-wrap { width: min(100%, 390px); margin: -5px auto 18px; }
+.mahjong-hotbar-title { display: flex; justify-content: space-between; margin-bottom: 7px; color: var(--soft); font-size: 13px; font-weight: 800; }
+.mahjong-hotbar-title strong { color: var(--accent); }
+.mahjong-hotbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 9px; border: 2px solid #b99462; border-radius: 14px; background: linear-gradient(145deg, #e8cf9e, #c89f67); box-shadow: inset 0 3px 8px rgba(88, 55, 24, .2), 0 5px 12px rgba(71, 53, 32, .14); }
+.mahjong-hotbar-slot { display: grid; min-width: 0; aspect-ratio: .82; place-items: center; border: 2px dashed rgba(100, 68, 37, .32); border-radius: 9px; background: rgba(255, 248, 226, .5); }
+.mahjong-hotbar-tile { display: grid; width: 88%; height: 88%; place-items: center; border: 1px solid #d1c2a8; border-radius: 8px; background: linear-gradient(145deg, #fffdf7, #f7ead3); font-family: 'Segoe UI Symbol', serif; font-size: clamp(27px, 7vw, 40px); font-weight: 800; -webkit-text-stroke: .55px currentColor; box-shadow: 3px 4px 0 #ad9270, 4px 6px 7px rgba(63, 53, 42, .2); }
+.mahjong-hotbar-tile--matched { animation: mahjong-match .48s ease-in forwards; }
+@keyframes mahjong-match { 45% { scale: 1.18; rotate: -4deg; filter: brightness(1.2); } 100% { scale: .25; rotate: 8deg; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .mahjong-hotbar-tile--matched { animation: none; opacity: .35; } }
 
 .game-panel--dots { max-width: 650px; }
 .dots-level-controls { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 20px 0; }
@@ -97,7 +110,7 @@
 
 @media (max-width: 520px) {
   .mahjong-board { min-height: 230px; padding: 14px 8px; }
-  .mahjong-tile { width: calc(100% - 3px); height: calc(100% - 3px); border-radius: 5px; box-shadow: 2px 3px 0 #a99d88, 3px 5px 5px rgba(63, 53, 42, .18); font-size: clamp(15px, 5vw, 27px); }
+  .mahjong-tile { width: calc(100% - 3px); height: calc(100% - 3px); border-radius: 5px; box-shadow: 2px 3px 0 #b09b7c, 3px 5px 5px rgba(63, 53, 42, .18); font-size: clamp(15px, 5vw, 27px); }
   .dots-board { gap: 2px; padding: 5px; border-radius: 12px; }
   .dots-cell { border-radius: 3px; }
   .dots-endpoint { border-width: 3px; }
