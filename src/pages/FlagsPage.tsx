@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlagQuestionCard } from '../components/FlagQuestionCard';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { useLanguage } from '../i18n/LanguageContext';
-import { createFlagQuestions, FLAG_LEVELS } from '../lib/flags';
+import { createFlagQuestions, flagImageUrl, FLAG_LEVELS } from '../lib/flags';
 
 export function FlagsPage() {
   const [levelIndex, setLevelIndex] = useState(0);
@@ -13,6 +13,13 @@ export function FlagsPage() {
   const { language } = useLanguage();
   const finished = questionIndex >= questions.length;
   const question = questions[questionIndex];
+
+  useEffect(() => {
+    questions.slice(questionIndex + 1, questionIndex + 4).forEach(({ answer }) => {
+      const image = new Image();
+      image.src = flagImageUrl(answer);
+    });
+  }, [questionIndex, questions]);
 
   function start(nextLevelIndex = levelIndex) {
     setLevelIndex(nextLevelIndex);
