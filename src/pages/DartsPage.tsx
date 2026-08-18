@@ -21,7 +21,7 @@ export function DartsPage() {
       <section className="game-panel game-panel--darts">
         <span className="game-icon" aria-hidden="true">🎯</span>
         <h1>Darts</h1>
-        <p className="game-status">{finished ? `Game over · ${total} points` : latest ? `${latest.label}: +${latest.score}` : 'Click the dartboard to throw'}</p>
+        <p className="game-status">{finished ? `Game over · ${total} points` : latest ? `${latest.label}: +${latest.score}` : 'Stop both sliders to throw'}</p>
         <div className="darts-cabinet">
           <div className="darts-cabinet__brand"><span>★</span> PLAYROOM DARTS <span>★</span></div>
           <div className="darts-stats">
