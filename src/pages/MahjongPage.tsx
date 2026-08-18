@@ -82,7 +82,7 @@ export function MahjongPage() {
         <MahjongBoard level={level} locked={atCapacity} tiles={tiles} onTileClick={chooseTile} />
         <MahjongHotbar tiles={hotbar} />
         <p className="game-hint">Move open tiles to the hot bar. Two identical tiles disappear and give 100 points.</p>
-        <div className="chess-actions"><button className="restart-button" onClick={() => start()}>New layout</button><button className="mine-tool" onClick={() => setTiles(shuffleRemainingTiles(tiles))}>Shuffle</button></div>
+        <button className="restart-button" onClick={() => start()}>New layout</button>
       </section>
     </main>
   );
