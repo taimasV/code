@@ -15,6 +15,8 @@
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input { font: inherit; }
+button, [role='button'], a { transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease, filter .2s ease, opacity .2s ease, transform .16s ease; }
+button:active:not(:disabled), [role='button']:active, a:active { transform: scale(.97); }
 a { color: inherit; }
 .container { width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 40px 0 72px; }
 .home-header { display: flex; min-height: 42px; align-items: center; justify-content: space-between; gap: 18px; }
@@ -122,4 +124,8 @@ a { color: inherit; }
   .tic-cell { border-radius: 14px; }
   .auth-card { margin-top: 42px; padding: 27px 22px; }
   .auth-card h1 { font-size: 33px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

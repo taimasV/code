@@ -15,8 +15,7 @@ export function FlagQuestionCard({ language, onAnswer, question, selected }: Fla
   function answerClass(code: string) {
     if (!selected) return 'flag-answer';
     if (code === question.answer) return 'flag-answer flag-answer--correct';
-    if (code === selected) return 'flag-answer flag-answer--wrong';
-    return 'flag-answer flag-answer--muted';
+    return 'flag-answer flag-answer--wrong';
   }
 
   return (

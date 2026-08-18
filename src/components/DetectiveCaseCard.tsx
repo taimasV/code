@@ -45,7 +45,7 @@ export function DetectiveCaseCard(props: DetectiveCaseCardProps) {
         <h3>{currentCase.question}</h3>
         <div className="detective-answers">
           {currentCase.answers.map((answer, index) => {
-            const wrong = wrongAnswers.includes(index);
+            const wrong = wrongAnswers.includes(index) || (solved && index !== currentCase.correctAnswer);
             const correct = solved && index === currentCase.correctAnswer;
             return <button className={correct ? 'detective-answer detective-answer--correct' : wrong ? 'detective-answer detective-answer--wrong' : 'detective-answer'} disabled={solved || wrong} key={answer} onClick={() => onAnswer(index)}>{answer}</button>;
           })}

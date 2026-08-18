@@ -20,10 +20,10 @@
 .detective-clues ol { display: grid; gap: 8px; margin: 10px 0 14px; padding-left: 24px; color: var(--soft); }
 .detective-clues li::marker { color: var(--accent); font-weight: 900; }
 .detective-answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-.detective-answer { padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f3ea; color: var(--ink); cursor: pointer; font-weight: 750; }
+.detective-answer { padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f3ea; color: var(--ink); cursor: pointer; font-weight: 750; transition: background-color .28s ease, border-color .28s ease, color .28s ease, transform .18s ease; }
 .detective-answer:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
 .detective-answer--wrong { border-color: #d99589; background: #f7dfdb; color: #a13e31; }
-.detective-answer--correct { border-color: #8dab83; background: #e4eddf; color: #38623d; }
+.detective-answer--correct { border-color: #8dab83; background: #e4eddf; color: #38623d; animation: answer-correct .38s ease; }
 .detective-explanation { margin: 12px 0 16px; color: var(--ink); }
 .detective-result { padding: 38px 20px; text-align: center; }
 .detective-result > span { font-size: 52px; }

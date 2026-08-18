@@ -5,11 +5,11 @@
 .flag-display img { display: block; width: min(100%, 320px); max-height: 190px; object-fit: contain; filter: drop-shadow(0 8px 10px rgba(42, 38, 66, .18)); }
 .flag-question-card h2 { margin: 22px 0 17px; font-size: 20px; }
 .flag-answers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
-.flag-answer { min-height: 49px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f4fb; color: var(--ink); cursor: pointer; font-weight: 750; transition: border-color .15s, transform .15s; }
+.flag-answer { min-height: 49px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f4fb; color: var(--ink); cursor: pointer; font-weight: 750; transition: background-color .28s ease, border-color .28s ease, color .28s ease, transform .18s ease; }
 .flag-answer:hover:enabled { border-color: var(--accent); transform: translateY(-2px); }
-.flag-answer--correct { border-color: #45a36d; background: #dff4e7; color: #287449; }
+.flag-answer--correct { border-color: #45a36d; background: #dff4e7; color: #287449; animation: answer-correct .38s ease; }
 .flag-answer--wrong { border-color: #d65b67; background: #fbe2e5; color: #a83e4a; }
-.flag-answer--muted { opacity: .55; }
+@keyframes answer-correct { 50% { transform: scale(1.025); box-shadow: 0 0 0 4px rgba(69, 163, 109, .14); } }
 .flags-result { padding: 34px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
 .flags-result > span { font-size: 58px; }
 .flags-result h2 { margin: 12px 0 8px; }
