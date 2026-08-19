@@ -1,0 +1,26 @@
+import type { GameRulesDictionary } from '../gameRules';
+
+export const gameRulesEn: GameRulesDictionary = {
+  '01': ['Players take turns placing X or O in an empty cell.', 'Make a row of three horizontally, vertically, or diagonally to win.', 'If the board fills with no row of three, the game is a draw.'],
+  '02': ['Choose a column to drop your piece.', 'Pieces fall to the lowest empty space.', 'Connect four pieces horizontally, vertically, or diagonally to win.'],
+  '03': ['Move the snake with the arrow keys, WASD, or screen buttons.', 'Eat food to grow and earn points.', 'Do not hit the wall or your own tail.'],
+  '04': ['Open two cards each turn.', 'A matching pair stays open; different cards turn back over.', 'Find every pair to win.'],
+  '05': ['Place your ships before the battle starts.', 'Take turns firing at cells on the enemy grid.', 'Sink every enemy ship before your fleet is destroyed.'],
+  '06': ['Start a challenge and wait for the target or green signal.', 'Click as quickly and accurately as you can.', 'An early click does not count; aim for the best score.'],
+  '07': ['Open cells that you think do not contain mines.', 'Numbers show how many mines touch that cell.', 'Mark suspected mines with flags and clear every safe cell.'],
+  '08': ['Choose a mode and move your pieces according to chess rules.', 'Protect your king and attack the opponent’s king.', 'In standard chess, checkmate the opponent to win.'],
+  '09': ['Move a piece diagonally forward onto an empty dark square.', 'Jump over an opposing piece to capture it; continue when another jump is available.', 'Reach the far edge to become a king and capture every enemy piece.'],
+  '10': ['Place a disc so it traps one or more enemy discs in a straight line.', 'All trapped discs flip to your color.', 'The player with the most discs when no moves remain wins.'],
+  '11': ['Select two identical free tiles.', 'A tile is free when it is not covered and has an open side.', 'Remove all pairs to clear the board.'],
+  '12': ['Connect dots of the same color with one continuous path.', 'Paths cannot cross or share a cell.', 'Connect every pair and fill the whole board.'],
+  '13': ['Move your pawn one space toward the opposite side, or place a wall.', 'Walls may slow a rival but cannot block every path.', 'The first pawn to reach the opposite edge wins.'],
+  '14': ['Fill empty cells with numbers from 1 to 9.', 'Each number may appear once in every row, column, and 3×3 box.', 'Complete the grid without changing the starting numbers.'],
+  '15': ['Row and column clues describe groups of filled squares.', 'Groups stay in order with at least one empty square between them.', 'Fill the correct cells to reveal the hidden picture.'],
+  '16': ['Guess the hidden English word in six tries.', 'Green is correct, yellow is in another position, and gray is absent.', 'Use each clue to find the word before the tries run out.'],
+  '17': ['Read the case and examine every clue carefully.', 'Compare the suspects, motives, and evidence.', 'Choose the answer that best explains the mystery.'],
+  '18': ['Find matching items on the board.', 'Combine equal items to create the next, better item.', 'Keep merging to discover the whole collection.'],
+  '19': ['Pick up the top nut from a bolt.', 'Move it to an empty bolt or onto a nut of the same color.', 'Sort every color onto its own bolt.'],
+  '20': ['Look closely at the displayed flag.', 'Choose the country that uses that flag.', 'Answer as many questions correctly as possible.'],
+  '21': ['Stop the moving aim lines to choose where the dart lands.', 'The center and narrow scoring rings give more points.', 'Use all darts and try to reach the highest total.'],
+  '22': ['Roll five dice up to three times each turn.', 'Hold any dice you want to keep before rolling again.', 'Choose one score category per turn and finish with the highest total.'],
+};

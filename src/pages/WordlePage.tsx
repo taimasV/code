@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
-import { GameRules } from '../components/GameRules';
 import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { WordleBoard } from '../components/WordleBoard';
 import { WordleKeyboard } from '../components/WordleKeyboard';
@@ -63,12 +62,6 @@ export function WordlePage() {
         </div>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{status}</p>
         <GameWinStreakBadge active attemptId={attemptId} game="wordle" result={won ? 'win' : lost ? 'loss' : null} />
-        <GameRules rules={[
-          `Guess the hidden ${length}-letter English word in six tries.`,
-          'Green means the letter is correct and in the right place.',
-          'Yellow means the letter is in the word but in another place.',
-          'Gray means the letter is not in the word.',
-        ]} tip="Type with your keyboard or use the buttons below, then press Enter." />
         <WordleBoard answer={answer} current={current} guesses={guesses} length={length} />
         <WordleKeyboard results={keyboardResults(guesses, answer)} onKey={press} />
         <button className="restart-button" onClick={() => start()}>New word</button>

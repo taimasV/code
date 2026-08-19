@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { en, type TranslationKey } from './en';
 import { fr } from './fr';
+import { kk } from './kk';
 import { ru } from './ru';
 
-export type Language = 'en' | 'ru' | 'fr';
+export type Language = 'en' | 'ru' | 'fr' | 'kk';
 type Variables = Record<string, string | number>;
 type LanguageContextValue = {
   language: Language;
@@ -11,12 +12,13 @@ type LanguageContextValue = {
   t: (key: TranslationKey, variables?: Variables) => string;
 };
 
-const dictionaries = { en, ru, fr };
+const dictionaries = { en, ru, fr, kk };
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function getInitialLanguage(): Language {
   const saved = localStorage.getItem('playroom-language');
-  if (saved === 'en' || saved === 'ru' || saved === 'fr') return saved;
+  if (saved === 'en' || saved === 'ru' || saved === 'fr' || saved === 'kk') return saved;
+  if (navigator.language.toLowerCase().startsWith('kk')) return 'kk';
   if (navigator.language.toLowerCase().startsWith('ru')) return 'ru';
   if (navigator.language.toLowerCase().startsWith('fr')) return 'fr';
   return 'en';

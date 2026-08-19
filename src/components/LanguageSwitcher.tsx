@@ -1,7 +1,7 @@
 import { useLanguage, type Language } from '../i18n/LanguageContext';
 import './language-switcher.css';
 
-const languages: Language[] = ['en', 'ru', 'fr'];
+const languages: Language[] = ['en', 'ru', 'kk', 'fr'];
 
 export function LanguageSwitcher() {
   const { language, setLanguage, t } = useLanguage();

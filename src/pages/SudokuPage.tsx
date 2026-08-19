@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { SudokuBoard } from '../components/SudokuBoard';
-import { GameRules } from '../components/GameRules';
 import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { createSudokuPuzzle, hasSudokuMistake, isSudokuComplete, sudokuFixedCells } from '../lib/sudoku';
 import { useGameAttempt } from '../lib/useGameAttempt';
@@ -43,16 +42,6 @@ export function SudokuPage() {
         <h1>Sudoku</h1>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{status}</p>
         <GameWinStreakBadge active attemptId={attemptId} game="sudoku" result={won ? 'win' : null} />
-        <GameRules
-          rules={[
-            'Fill every empty cell with a number from 1 to 9.',
-            'A number may appear only once in each row.',
-            'A number may appear only once in each column.',
-            'A number may appear only once in each 3×3 box.',
-            'The dark starting numbers cannot be changed.',
-          ]}
-          tip="Select an empty cell, then use the number pad or your keyboard. Use Erase, Backspace, or Delete to clear it."
-        />
         <SudokuBoard board={board} fixed={fixed} selected={selected} onSelect={setSelected} />
         <div className="sudoku-keypad" aria-label="Number pad">
           {Array.from({ length: 9 }, (_, index) => <button key={index} onClick={() => enter(index + 1)}>{index + 1}</button>)}

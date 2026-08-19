@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
 import { NonogramBoard } from '../components/NonogramBoard';
-import { GameRules } from '../components/GameRules';
 import { GameWinStreakBadge } from '../components/GameWinStreak';
 import { createNonogramBoard, isNonogramComplete, NONOGRAM_PUZZLES, type NonogramMark } from '../lib/nonogram';
 import { useGameAttempt } from '../lib/useGameAttempt';
@@ -33,15 +32,6 @@ export function NonogramPage() {
         <h1>Nonogram</h1>
         <p className={`game-status ${won ? 'game-status--winner' : ''}`}>{won ? 'Picture complete! 🎉' : `Puzzle ${puzzleIndex + 1} · Use the clues to reveal the picture`}</p>
         <GameWinStreakBadge active attemptId={attemptId} game="nonogram" result={won ? 'win' : null} />
-        <GameRules
-          rules={[
-            'Numbers beside a row describe groups of filled squares in that row.',
-            'Numbers above a column describe groups of filled squares in that column.',
-            'Groups appear in the shown order and have at least one empty square between them.',
-            'Fill the correct squares to reveal the hidden picture.',
-          ]}
-          tip="Click to fill a square. Right-click squares you know are empty to mark them with ×. Crosses are optional."
-        />
         <NonogramBoard board={board} puzzle={puzzle} locked={won} onChange={change} />
         <p className="game-hint">Click to fill a square. Right-click to mark an empty square with ×.</p>
         <div className="chess-actions">

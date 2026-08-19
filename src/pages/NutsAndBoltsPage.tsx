@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { GamePageHeader } from '../components/GamePageHeader';
-import { GameRules } from '../components/GameRules';
 import { NutsAndBoltsBoard } from '../components/NutsAndBoltsBoard';
 import { NutsDifficultySelect } from '../components/NutsDifficultySelect';
 import { GameWinStreakBadge } from '../components/GameWinStreak';
@@ -68,7 +67,6 @@ export function NutsAndBoltsPage() {
         </p>
         <GameWinStreakBadge active attemptId={attemptId} game="nuts-and-bolts" result={solved ? 'win' : null} />
         <NutsDifficultySelect value={difficulty} onChange={changeDifficulty} />
-        <GameRules rules={['Choose a bolt to pick up its top nut.', 'Move it to an empty bolt or onto the same color.', 'Sort every color onto its own bolt.']} />
         <NutsAndBoltsBoard board={board} selected={selected} onSelect={selectBolt} />
         <p className="game-hint">{selected === null ? 'Choose a bolt.' : 'Now choose where to move the top nut.'}</p>
         <div className="nuts-actions">

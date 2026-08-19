@@ -1,0 +1,26 @@
+import type { GameRulesDictionary } from '../gameRules';
+
+export const gameRulesFr: GameRulesDictionary = {
+  '01': ['Les joueurs placent à tour de rôle un X ou un O dans une case vide.', 'Aligne trois symboles horizontalement, verticalement ou en diagonale.', 'Si la grille est pleine sans alignement, la partie est nulle.'],
+  '02': ['Choisis une colonne pour y laisser tomber ton jeton.', 'Le jeton tombe dans la case vide la plus basse.', 'Aligne quatre jetons horizontalement, verticalement ou en diagonale.'],
+  '03': ['Dirige le serpent avec les flèches, WASD ou les boutons à l’écran.', 'Mange la nourriture pour grandir et gagner des points.', 'Ne touche ni le mur ni ta propre queue.'],
+  '04': ['Retourne deux cartes à chaque tour.', 'Une paire reste visible, sinon les cartes se retournent.', 'Trouve toutes les paires pour gagner.'],
+  '05': ['Place tes navires avant le début de la bataille.', 'Tirez chacun votre tour sur une case de la grille adverse.', 'Coule toute la flotte ennemie avant de perdre la tienne.'],
+  '06': ['Lance le défi et attends la cible ou le signal vert.', 'Clique aussi vite et précisément que possible.', 'Un clic trop tôt ne compte pas : vise le meilleur score.'],
+  '07': ['Ouvre les cases où tu penses qu’il n’y a pas de mine.', 'Le nombre indique combien de mines touchent cette case.', 'Pose des drapeaux sur les mines et ouvre toutes les cases sûres.'],
+  '08': ['Choisis un mode et déplace les pièces selon les règles des échecs.', 'Protège ton roi et attaque celui de l’adversaire.', 'Aux échecs classiques, mets le roi adverse en échec et mat.'],
+  '09': ['Déplace un pion en diagonale vers une case sombre vide.', 'Saute par-dessus un pion adverse pour le capturer et continue si possible.', 'Atteins le bord opposé pour devenir une dame et capture toutes les pièces adverses.'],
+  '10': ['Place un disque pour encadrer des disques adverses en ligne droite.', 'Tous les disques encadrés prennent ta couleur.', 'Quand aucun coup ne reste, le joueur avec le plus de disques gagne.'],
+  '11': ['Sélectionne deux tuiles libres identiques.', 'Une tuile est libre si elle n’est pas couverte et qu’un côté est ouvert.', 'Retire toutes les paires pour vider le plateau.'],
+  '12': ['Relie les points de même couleur avec un chemin continu.', 'Les chemins ne peuvent ni se croiser ni partager une case.', 'Relie toutes les paires et remplis toute la grille.'],
+  '13': ['Avance ton pion d’une case vers le bord opposé ou place un mur.', 'Un mur peut ralentir un rival, mais ne doit pas bloquer tous les chemins.', 'Le premier pion qui atteint le bord opposé gagne.'],
+  '14': ['Remplis les cases avec les nombres de 1 à 9.', 'Chaque nombre apparaît une fois par ligne, colonne et bloc de 3×3.', 'Complète la grille sans modifier les nombres de départ.'],
+  '15': ['Les indices indiquent les groupes de cases remplies de chaque ligne et colonne.', 'Les groupes restent dans l’ordre et sont séparés par une case vide.', 'Remplis les bonnes cases pour révéler l’image.'],
+  '16': ['Devine le mot anglais caché en six essais.', 'Vert signifie juste, jaune mal placé et gris absent.', 'Utilise les indices pour trouver le mot avant la fin des essais.'],
+  '17': ['Lis l’affaire et examine attentivement chaque indice.', 'Compare les suspects, les mobiles et les preuves.', 'Choisis la réponse qui explique le mieux le mystère.'],
+  '18': ['Trouve des objets identiques sur le plateau.', 'Fusionne-les pour créer un objet de niveau supérieur.', 'Continue pour découvrir toute la collection.'],
+  '19': ['Prends l’écrou situé au sommet d’un boulon.', 'Pose-le sur un boulon vide ou sur un écrou de même couleur.', 'Trie chaque couleur sur son propre boulon.'],
+  '20': ['Observe attentivement le drapeau affiché.', 'Choisis le pays auquel appartient ce drapeau.', 'Donne autant de bonnes réponses que possible.'],
+  '21': ['Arrête les lignes de visée pour choisir l’impact de la fléchette.', 'Le centre et les anneaux fins rapportent plus de points.', 'Utilise toutes les fléchettes et vise le meilleur total.'],
+  '22': ['Lance cinq dés jusqu’à trois fois par tour.', 'Garde les dés souhaités avant de relancer.', 'Choisis une catégorie par tour et termine avec le meilleur total.'],
+};
